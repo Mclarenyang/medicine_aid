@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (4.4.0)
+  - CocoaAsyncSocket (7.6.1)
+  - TextFieldEffects (1.3.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.4.0)
+  - CocoaAsyncSocket (~> 7.6.0)
+  - TextFieldEffects (~> 1.3.2)
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
+  TextFieldEffects: 9e5cce561ea39c75b86e9d3637601727a67e8b23
+
+PODFILE CHECKSUM: fcb1df849f0d4a53504b050d07b466bf6e3ccd1f
+
+COCOAPODS: 1.2.1
