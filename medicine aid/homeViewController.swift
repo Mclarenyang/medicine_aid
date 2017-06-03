@@ -53,7 +53,6 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
         
         // 初始化轮播图
         scrollView = UIScrollView.init(frame: CGRect(x:0,y:64, width:SCROLL_WIDTH, height:SCROLL_HEIGHT*4/5))
-        // ScrollView背景颜色
         scrollView?.backgroundColor = UIColor.white
         // ScrollView滚动量
         scrollView?.contentSize = CGSize(width:SCROLL_WIDTH * CGFloat((scArray?.count)!), height:0)
@@ -64,7 +63,7 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
         // 是否显示水平滑条
         scrollView?.showsHorizontalScrollIndicator = false
         scrollView?.showsVerticalScrollIndicator = false
-        // 协议
+
         scrollView?.delegate = self
         self.view.addSubview(scrollView!)
         
