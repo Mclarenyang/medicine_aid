@@ -64,6 +64,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         passwordText.delegate = self
         passwordText.isSecureTextEntry = true
         self.view.addSubview(passwordText)
+        
         // 秘码按钮
         let showPassWordBtn = UIButton(frame:CGRect(x:screenWidth-135,y:5,width:30,height:20))
         showPassWordBtn.setBackgroundImage(UIImage(named:"showPassWord"), for: UIControlState.normal)

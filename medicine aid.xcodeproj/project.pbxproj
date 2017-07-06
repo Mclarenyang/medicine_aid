@@ -17,6 +17,11 @@
 		46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265C1EC3EEA7007AEA36 /* tabBar.swift */; };
 		46AC265F1EC3F127007AEA36 /* tabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265E1EC3F127007AEA36 /* tabBarViewController.swift */; };
 		46AC26611EC3F3C5007AEA36 /* mainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC26601EC3F3C5007AEA36 /* mainTabbarController.swift */; };
+		46BE6EBA1F0DD24E00D41852 /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BE6EB51F0DD24E00D41852 /* QRCodeReader.swift */; };
+		46BE6EBB1F0DD24E00D41852 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BE6EB61F0DD24E00D41852 /* QRCodeViewController.swift */; };
+		46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BE6EB71F0DD24E00D41852 /* QRCodeReaderView.swift */; };
+		46BE6EBD1F0DD24E00D41852 /* QRCodeReaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BE6EB81F0DD24E00D41852 /* QRCodeReaderView.xib */; };
+		46BE6EBE1F0DD24E00D41852 /* QRCodeReader.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46BE6EB91F0DD24E00D41852 /* QRCodeReader.xcassets */; };
 		46C7C4151ECA9D7300EB600A /* selectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */; };
 		46E105551EBF354400AB4D26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E105541EBF354400AB4D26 /* AppDelegate.swift */; };
 		46E1055D1EBF354400AB4D26 /* medicine_aid.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46E1055B1EBF354400AB4D26 /* medicine_aid.xcdatamodeld */; };
@@ -41,6 +46,11 @@
 		46AC265C1EC3EEA7007AEA36 /* tabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBar.swift; sourceTree = "<group>"; };
 		46AC265E1EC3F127007AEA36 /* tabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarViewController.swift; sourceTree = "<group>"; };
 		46AC26601EC3F3C5007AEA36 /* mainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTabbarController.swift; sourceTree = "<group>"; };
+		46BE6EB51F0DD24E00D41852 /* QRCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReader.swift; sourceTree = "<group>"; };
+		46BE6EB61F0DD24E00D41852 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		46BE6EB71F0DD24E00D41852 /* QRCodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderView.swift; sourceTree = "<group>"; };
+		46BE6EB81F0DD24E00D41852 /* QRCodeReaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeReaderView.xib; sourceTree = "<group>"; };
+		46BE6EB91F0DD24E00D41852 /* QRCodeReader.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = QRCodeReader.xcassets; sourceTree = "<group>"; };
 		46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectTableViewController.swift; sourceTree = "<group>"; };
 		46E105511EBF354400AB4D26 /* medicine aid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "medicine aid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E105541EBF354400AB4D26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,14 +92,26 @@
 			children = (
 				468958941EC313B400E5DCED /* homeViewController.swift */,
 				468958A41EC3564900E5DCED /* queueViewController.swift */,
-				461A64A61EC7050C00F554B6 /* prescribingViewController.swift */,
 				468958A21EC351F800E5DCED /* searchingMedicineViewController.swift */,
 				468958A61EC357A600E5DCED /* personalViewController.swift */,
 				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
 				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
+				461A64A61EC7050C00F554B6 /* prescribingViewController.swift */,
 				461A64A51EC6CC4F00F554B6 /* controllers */,
 			);
 			name = controller;
+			sourceTree = "<group>";
+		};
+		46BE6EB41F0DD22B00D41852 /* QRscan */ = {
+			isa = PBXGroup;
+			children = (
+				46BE6EB51F0DD24E00D41852 /* QRCodeReader.swift */,
+				46BE6EB61F0DD24E00D41852 /* QRCodeViewController.swift */,
+				46BE6EB71F0DD24E00D41852 /* QRCodeReaderView.swift */,
+				46BE6EB81F0DD24E00D41852 /* QRCodeReaderView.xib */,
+				46BE6EB91F0DD24E00D41852 /* QRCodeReader.xcassets */,
+			);
+			name = QRscan;
 			sourceTree = "<group>";
 		};
 		46E105481EBF354400AB4D26 = {
@@ -113,6 +135,7 @@
 		46E105531EBF354400AB4D26 /* medicine aid */ = {
 			isa = PBXGroup;
 			children = (
+				46BE6EB41F0DD22B00D41852 /* QRscan */,
 				46E604F41ECA8AFB00A4B233 /* model */,
 				46E1056B1EBF365000AB4D26 /* main */,
 				468958931EC3130C00E5DCED /* controller */,
@@ -230,6 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E105621EBF354400AB4D26 /* LaunchScreen.storyboard in Resources */,
+				46BE6EBD1F0DD24E00D41852 /* QRCodeReaderView.xib in Resources */,
+				46BE6EBE1F0DD24E00D41852 /* QRCodeReader.xcassets in Resources */,
 				46E1055F1EBF354400AB4D26 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,12 +322,15 @@
 				468958A51EC3564900E5DCED /* queueViewController.swift in Sources */,
 				468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,
+				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
 				46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */,
+				46BE6EBA1F0DD24E00D41852 /* QRCodeReader.swift in Sources */,
 				46AC265B1EC3EB25007AEA36 /* tabBarButton.swift in Sources */,
 				468958951EC313B400E5DCED /* homeViewController.swift in Sources */,
 				46E1055D1EBF354400AB4D26 /* medicine_aid.xcdatamodeld in Sources */,
 				468958A71EC357A600E5DCED /* personalViewController.swift in Sources */,
 				46E105551EBF354400AB4D26 /* AppDelegate.swift in Sources */,
+				46BE6EBB1F0DD24E00D41852 /* QRCodeViewController.swift in Sources */,
 				46E105701EBF5A3D00AB4D26 /* registerViewController.swift in Sources */,
 				46E1056A1EBF357F00AB4D26 /* RootViewController.swift in Sources */,
 			);

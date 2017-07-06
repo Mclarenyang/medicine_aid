@@ -22,6 +22,7 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.automaticallyAdjustsScrollViewInsets = false
         /// 设置状态栏颜色
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent;
@@ -45,6 +46,7 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
         
         let treatBtn = UIButton(frame: CGRect(x:SCROLL_WIDTH*5/7-75,y:SCROLL_HEIGHT+SCROLL_HEIGHT*1/7,width:150,height:220))
         treatBtn.setBackgroundImage(UIImage(named:"treat_bt"), for: UIControlState.normal)
+        treatBtn.addTarget(self, action: #selector(treatBtnTap(_:)), for: UIControlEvents.touchUpInside)
         self.view.addSubview(treatBtn)
         
         /// 创建滚动视图
@@ -121,6 +123,7 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
     //循环滚动方法
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //如果图片在第一张的位置
@@ -186,6 +189,16 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
         // 隐藏tabbar
         queueView.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(queueView, animated: true)
+        
+    }
+    
+    func treatBtnTap(_ button:UIButton){
+        
+        /// push界面
+        let qrScanView = QRCodeViewController()
+        // 隐藏tabbar
+        qrScanView.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(qrScanView, animated: true)
         
     }
     

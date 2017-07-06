@@ -15,7 +15,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     var clientSocket:GCDAsyncSocket!
     // 预设IP地址
     //let beforeIP = "113.250.152.75"
-    let beforeIP = "192.168.1.109"
+    let beforeIP = "192.168.2.141"
     let beforePort = UInt16(5566)
     
     
@@ -152,7 +152,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     func DoneBtn(_ button:UIButton){
         
         let serviceStr: NSMutableString = NSMutableString()
-        serviceStr.append("灯亮\n")
+        serviceStr.append("OPEN")
         //serviceStr.append("\n")
         clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
         clientSocket.readData(withTimeout: -1, tag: 0)
