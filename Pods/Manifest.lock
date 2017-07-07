@@ -1,18 +1,29 @@
 PODS:
   - Alamofire (4.4.0)
   - CocoaAsyncSocket (7.6.1)
-  - TextFieldEffects (1.3.2)
+  - Realm (2.8.3):
+    - Realm/Headers (= 2.8.3)
+  - Realm/Headers (2.8.3)
+  - RealmSwift (2.8.3):
+    - Realm (= 2.8.3)
+  - SwiftyJSON (3.1.4)
+  - TextFieldEffects (1.3.3)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4.0)
   - CocoaAsyncSocket (~> 7.6.0)
+  - RealmSwift (~> 2.8.0)
+  - SwiftyJSON (~> 3.1.4)
   - TextFieldEffects (~> 1.3.2)
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
-  TextFieldEffects: 9e5cce561ea39c75b86e9d3637601727a67e8b23
+  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: 650add79a590fc3249a7078b60136b70faf4714a
+PODFILE CHECKSUM: 862708c955a012d3b367d9deff347d99a4896e42
 
 COCOAPODS: 1.2.1
