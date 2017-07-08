@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import TextFieldEffects
 import CocoaAsyncSocket
 
 class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSocketDelegate{
@@ -22,6 +23,15 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     // 屏幕信息
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
+    
+    // 药材信息输入
+    var MedicineName = HoshiTextField()
+    var MedicineWeight = HoshiTextField()
+    
+    // 显示活动条目
+    var showView = UIScrollView()
+    var listHight = 0
+    var viewTag = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +59,35 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         let addBgView = UIView(frame: CGRect(x:0,y:screenHeight/5 + 69 ,width:screenWidth,height:screenHeight*4/5))
         addBgView.backgroundColor = UIColor.white
         self.view.addSubview(addBgView)
-        // 设置搜索框
-        let searchingbar = UISearchBar(frame:CGRect(x:0, y:0, width:screenWidth - 40 , height:30))
-        searchingbar.keyboardType = UIKeyboardType.alphabet
-        searchingbar.placeholder = "查询"
-        searchingbar.searchBarStyle = UISearchBarStyle.prominent
-        addBgView.addSubview(searchingbar)
+        
+        // 显示窗口
+        showView = UIScrollView(frame: CGRect(x:0,y:50 ,width:screenWidth,height:screenHeight*4/5))
+        addBgView.addSubview(showView)
+        
+        
+        // 设置输入框
+        MedicineName = HoshiTextField(frame:CGRect(x:0, y:0, width:(screenWidth - 40)/2, height:50))
+        MedicineName.placeholder = "名称"
+        MedicineName.borderActiveColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
+        MedicineName.autocorrectionType = UITextAutocorrectionType.no
+        MedicineName.returnKeyType = UIReturnKeyType.next
+        MedicineName.clearButtonMode = UITextFieldViewMode.whileEditing
+        MedicineName.keyboardAppearance = UIKeyboardAppearance.light
+        addBgView.addSubview(MedicineName)
+        //
+        MedicineWeight = HoshiTextField(frame:CGRect(x:(screenWidth - 40)/2, y:0, width:(screenWidth - 40)/2, height:50))
+        MedicineWeight.placeholder = "重量(g)"
+        MedicineWeight.borderActiveColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
+        MedicineWeight.autocorrectionType = UITextAutocorrectionType.no
+        MedicineWeight.returnKeyType = UIReturnKeyType.next
+        MedicineWeight.clearButtonMode = UITextFieldViewMode.whileEditing
+        MedicineWeight.keyboardType = UIKeyboardType.phonePad
+        MedicineWeight.keyboardAppearance = UIKeyboardAppearance.light
+        addBgView.addSubview(MedicineWeight)
+        
+        
         // 设置添加按钮
-        let addBtn = UIButton(frame:CGRect(x:screenWidth - 30, y:5, width:20, height:20))
+        let addBtn = UIButton(frame:CGRect(x:screenWidth - 30, y:20, width:20, height:20))
         addBtn.setBackgroundImage(UIImage(named:"Add"), for: UIControlState.normal)
         addBtn.addTarget(self, action: #selector(addBtnTap(_:)), for: UIControlEvents.touchUpInside)
         addBgView.addSubview(addBtn)
@@ -66,6 +97,8 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         DoneBtn.setBackgroundImage(UIImage(named:"register_done_bt"), for: UIControlState.normal)
         DoneBtn.addTarget(self, action: #selector(DoneBtn(_:)), for: .touchUpInside)
         addBgView.addSubview(DoneBtn)
+        
+        
         // 链接
         TCPLink(IPAddr: beforeIP, serverPort: beforePort)
         // Do any additional setup after loading the view.
@@ -77,9 +110,67 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         // Dispose of any resources that can be recreated.
     }
     
-    // 按钮事件
+    // 按钮事件(添加药物条目)
     func addBtnTap(_ button:UIButton){
         
+        let medicalList = medicalListView(frame:CGRect(x:5, y:listHight, width: Int(screenWidth - 5) , height:50))
+        medicalList.tag = viewTag
+        
+        medicalList.addSubview(medicalList.medicineName)
+        medicalList.addSubview(medicalList.medicineWeight)
+        medicalList.backgroundColor = UIColor(patternImage:medicalList.image!)
+        medicalList.deleteBtn.setBackgroundImage(UIImage(named:"deleteBtn"), for: .normal)
+        medicalList.deleteBtn.tag = viewTag //绑定按钮
+        medicalList.deleteBtn.addTarget(self, action: #selector(deleteMedicineList(sender:)), for: .touchUpInside)
+        medicalList.addSubview(medicalList.deleteBtn)
+        showView.addSubview(medicalList)
+        
+        
+        medicalList.medicineName.text = self.MedicineName.text
+        medicalList.medicineWeight.text = self.MedicineWeight.text
+        
+        //更新事件
+        self.MedicineName.text = ""
+        self.MedicineWeight.text = ""
+        viewTag = viewTag + 1
+        listHight = listHight + 50
+        
+        //删除光标
+        MedicineName.resignFirstResponder()
+        MedicineWeight.resignFirstResponder()
+        
+    }
+    
+    //删除药物列表
+    func deleteMedicineList(sender:UIButton?){
+        
+      let btnTag = sender?.tag
+
+        let maView = view.viewWithTag(btnTag!) as! medicalListView
+        maView.removeFromSuperview()
+        
+        guard btnTag! < viewTag - 1 else {
+            
+            listHight = listHight - 50
+            viewTag = viewTag - 1
+            
+            return
+        }
+        
+        //删除后的位置处理
+        for mytag in (btnTag!+1)...viewTag-1{
+           
+            let nowView = view.viewWithTag(mytag) as! medicalListView
+            
+            nowView.tag = mytag - 1
+            nowView.deleteBtn.tag = mytag - 1
+            //视图位置上移
+            nowView.frame = CGRect(x:5, y:Int(nowView.frame.minY - 50), width: Int(screenWidth - 5) , height:50)
+        
+        }
+        
+        listHight = listHight - 50
+        viewTag = viewTag - 1
     }
 
     // TCP链接
@@ -185,8 +276,10 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-        
     }
+    
+    
+    
     /*
     // MARK: - Navigation
 

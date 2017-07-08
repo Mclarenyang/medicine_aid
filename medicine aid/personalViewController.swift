@@ -24,6 +24,7 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         self.navigationItem.title = "个人中心"
         self.navigationController?.navigationBar.barTintColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha:1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
         // 右边按钮
         rightbtn = UIButton(frame: CGRect(x:0,y:0,width:20,height:20))
         rightbtn.setBackgroundImage(UIImage(named:"addpop"), for: UIControlState.normal)
@@ -40,6 +41,7 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         let personView = UIView(frame: CGRect(x:0,y:64,width:screenWidth,height:screenHeight/5))
         personView.backgroundColor = UIColor.white
         bgView.addSubview(personView)
+        
         // 设置头像
         let personHeadIamge = UIImageView(frame:CGRect(x:screenWidth/12,y:screenHeight/10-45,width:90,height:90))
         personHeadIamge.image = UIImage(named:"head") //读取处理
@@ -49,6 +51,9 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         // 设置昵称
         let nickname = UILabel(frame: CGRect(x:screenWidth/9+100,y:screenHeight/10-45,width:300,height:100))
         nickname.font = UIFont.boldSystemFont(ofSize: 22)
+        nickname.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(personalInfo))
+        nickname.addGestureRecognizer(gestureRecognizer)
         nickname.text = "一只生病的兔纸🐰" //读取处理
         personView.addSubview(nickname)
         
@@ -97,6 +102,13 @@ class personalViewController: UIViewController , UIPopoverPresentationController
     // 服药提醒
     func cautionBtnTap(_ button:UIButton){
         
+        if UIApplication.shared.canOpenURL(NSURL(string:"x-apple-reminder://")! as URL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(NSURL(string:"x-apple-reminder://") as! URL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(NSURL(string:"x-apple-reminder://")! as URL)
+            }
+        }
         
     }
     // 跳转事件
@@ -125,6 +137,14 @@ class personalViewController: UIViewController , UIPopoverPresentationController
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+    
+    func personalInfo(){
+        
+        let personalInfoView = selectTableViewController()
+        // 隐藏tabbar
+        personalInfoView.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(personalInfoView, animated: true)
     }
     
     /*

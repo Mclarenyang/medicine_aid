@@ -13,6 +13,7 @@
 		468958A51EC3564900E5DCED /* queueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A41EC3564900E5DCED /* queueViewController.swift */; };
 		468958A71EC357A600E5DCED /* personalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A61EC357A600E5DCED /* personalViewController.swift */; };
 		468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B0D301EC55109001CDFCD /* aboutUsViewController.swift */; };
+		46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A132A51F0F784A004E3CE9 /* medicalListView.swift */; };
 		46AC265B1EC3EB25007AEA36 /* tabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265A1EC3EB25007AEA36 /* tabBarButton.swift */; };
 		46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265C1EC3EEA7007AEA36 /* tabBar.swift */; };
 		46AC265F1EC3F127007AEA36 /* tabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265E1EC3F127007AEA36 /* tabBarViewController.swift */; };
@@ -48,6 +49,7 @@
 		468958A41EC3564900E5DCED /* queueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = queueViewController.swift; sourceTree = "<group>"; };
 		468958A61EC357A600E5DCED /* personalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = personalViewController.swift; sourceTree = "<group>"; };
 		468B0D301EC55109001CDFCD /* aboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutUsViewController.swift; sourceTree = "<group>"; };
+		46A132A51F0F784A004E3CE9 /* medicalListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicalListView.swift; sourceTree = "<group>"; };
 		46AC265A1EC3EB25007AEA36 /* tabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarButton.swift; sourceTree = "<group>"; };
 		46AC265C1EC3EEA7007AEA36 /* tabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBar.swift; sourceTree = "<group>"; };
 		46AC265E1EC3F127007AEA36 /* tabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		461A64A51EC6CC4F00F554B6 /* controllers */ = {
+		461A64A51EC6CC4F00F554B6 /* FrameworkcControllers */ = {
 			isa = PBXGroup;
 			children = (
 				46AC265A1EC3EB25007AEA36 /* tabBarButton.swift */,
@@ -90,22 +92,48 @@
 				46AC265E1EC3F127007AEA36 /* tabBarViewController.swift */,
 				46AC26601EC3F3C5007AEA36 /* mainTabbarController.swift */,
 			);
-			name = controllers;
+			name = FrameworkcControllers;
 			sourceTree = "<group>";
 		};
 		468958931EC3130C00E5DCED /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				46E1056E1EBF366F00AB4D26 /* login */,
 				468958941EC313B400E5DCED /* homeViewController.swift */,
-				468958A41EC3564900E5DCED /* queueViewController.swift */,
 				468958A21EC351F800E5DCED /* searchingMedicineViewController.swift */,
 				468958A61EC357A600E5DCED /* personalViewController.swift */,
-				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
-				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
-				461A64A61EC7050C00F554B6 /* prescribingViewController.swift */,
-				461A64A51EC6CC4F00F554B6 /* controllers */,
+				46A132A21F0F76AA004E3CE9 /* viewLink1 */,
+				46A132A31F0F7709004E3CE9 /* viewLink2 */,
+				461A64A51EC6CC4F00F554B6 /* FrameworkcControllers */,
 			);
 			name = controller;
+			sourceTree = "<group>";
+		};
+		46A132A21F0F76AA004E3CE9 /* viewLink1 */ = {
+			isa = PBXGroup;
+			children = (
+				46BE6EB41F0DD22B00D41852 /* QRscan */,
+				468958A41EC3564900E5DCED /* queueViewController.swift */,
+				461A64A61EC7050C00F554B6 /* prescribingViewController.swift */,
+			);
+			name = viewLink1;
+			sourceTree = "<group>";
+		};
+		46A132A31F0F7709004E3CE9 /* viewLink2 */ = {
+			isa = PBXGroup;
+			children = (
+				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
+				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
+			);
+			name = viewLink2;
+			sourceTree = "<group>";
+		};
+		46A132A41F0F773D004E3CE9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				46A132A51F0F784A004E3CE9 /* medicalListView.swift */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		46BE6EB41F0DD22B00D41852 /* QRscan */ = {
@@ -141,11 +169,10 @@
 		46E105531EBF354400AB4D26 /* medicine aid */ = {
 			isa = PBXGroup;
 			children = (
-				46BE6EB41F0DD22B00D41852 /* QRscan */,
 				46E604F41ECA8AFB00A4B233 /* model */,
 				46E1056B1EBF365000AB4D26 /* main */,
+				46A132A41F0F773D004E3CE9 /* view */,
 				468958931EC3130C00E5DCED /* controller */,
-				46E1056E1EBF366F00AB4D26 /* login */,
 			);
 			path = "medicine aid";
 			sourceTree = "<group>";
@@ -333,6 +360,7 @@
 				468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */,
 				468958A51EC3564900E5DCED /* queueViewController.swift in Sources */,
 				468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */,
+				46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,
 				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
 				46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */,

@@ -13,6 +13,11 @@ class selectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /// 设置导航栏
+        self.navigationItem.title = "个人信息"
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha:1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
