@@ -32,6 +32,7 @@
 		46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056C1EBF366600AB4D26 /* loginViewController.swift */; };
 		46E105701EBF5A3D00AB4D26 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */; };
 		46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */; };
+		46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC2ACB1F136493006AE02A /* UserTest.swift */; };
 		8878CD66C77A758DEF3BBA8C /* Pods_medicine_aid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		46E1056C1EBF366600AB4D26 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
 		46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changeInfoViewController.swift; sourceTree = "<group>"; };
+		46EC2ACB1F136493006AE02A /* UserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
 		4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_medicine_aid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 		46E604F41ECA8AFB00A4B233 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				46EC2ACB1F136493006AE02A /* UserTest.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				461A64A71EC7050C00F554B6 /* prescribingViewController.swift in Sources */,
 				468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */,
 				468958A51EC3564900E5DCED /* queueViewController.swift in Sources */,
+				46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */,
 				468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */,
 				46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,

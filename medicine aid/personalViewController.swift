@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaAsyncSocket
+import RealmSwift
 
 class personalViewController: UIViewController , UIPopoverPresentationControllerDelegate , UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
@@ -17,8 +18,12 @@ class personalViewController: UIViewController , UIPopoverPresentationController
 
     var rightbtn = UIButton()
     
+    //个人
+    var personView = UIView()
     //头像
     var personHeadIamge = UIImageView()
+    //昵称
+    var nickname = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +46,13 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         self.view.addSubview(bgView)
         
         /// 设置个人显示view
-        let personView = UIView(frame: CGRect(x:0,y:64,width:screenWidth,height:screenHeight/5))
+        personView = UIView(frame: CGRect(x:0,y:64,width:screenWidth,height:screenHeight/5))
         personView.backgroundColor = UIColor.white
         bgView.addSubview(personView)
         
         // 设置头像
         personHeadIamge = UIImageView(frame:CGRect(x:screenWidth/12,y:screenHeight/10-45,width:90,height:90))
-        personHeadIamge.image = UIImage(named:"head") //读取处理
+        //personHeadIamge.image = UIImage(named:"head") //读取处理
         personHeadIamge.layer.masksToBounds = true
         personHeadIamge.layer.cornerRadius = 45
         personHeadIamge.isUserInteractionEnabled = true
@@ -56,13 +61,16 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         personView.addSubview(personHeadIamge)
         
         // 设置昵称
-        let nickname = UILabel(frame: CGRect(x:screenWidth/9+100,y:screenHeight/10-45,width:300,height:100))
+        nickname = UILabel(frame: CGRect(x:screenWidth/9+100,y:screenHeight/10-45,width:300,height:100))
         nickname.font = UIFont.boldSystemFont(ofSize: 22)
         nickname.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(personalInfo))
         nickname.addGestureRecognizer(gestureRecognizer)
-        nickname.text = "一只生病的兔纸🐰" //读取处理
+        //nickname.text = "一只生病的兔纸🐰" //读取处理
         personView.addSubview(nickname)
+        
+        //数据库读取数据
+        getPersonInfo()
         
         /// 设置中间条目
         let numView = UIView(frame: CGRect(x:0,y:screenHeight/3.25,width:screenWidth,height:screenHeight/6))
@@ -73,7 +81,6 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         let infoView = UIView(frame: CGRect(x:0,y:screenHeight/2.05,width:screenWidth,height:screenHeight/2))
         infoView.backgroundColor = UIColor.white
         bgView.addSubview(infoView)
-        
         
         //  设置按钮
         //   问诊记录
@@ -100,9 +107,16 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        getPersonInfo()
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
@@ -187,6 +201,7 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         
     }
     
+    //相机方法
     func camera(){
         
         guard QRCodeReader.isDeviceAvailable() else{
@@ -206,6 +221,60 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         
     }
     
+    //获取照片后的代理
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        //print(info)
+        
+        personHeadIamge.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        //更新头像
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        let realm = try! Realm()
+        let UserWhoUpdateHeard = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        //
+        realm.beginWrite()
+        
+        UserWhoUpdateHeard.UserHeadImage = UIImagePNGRepresentation(personHeadIamge.image!) as NSData!
+        
+        try! realm.commitWrite()
+        
+        
+        //图片控制器退出
+        picker.dismiss(animated: true, completion: {
+            () -> Void in
+        })
+        
+    }
+    
+    //读取数据
+    func getPersonInfo() {
+        
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        //头像
+        if User.UserHeadImage == nil {
+            personHeadIamge.image = UIImage(named:"SettingHeardImage")
+        }else{
+            personHeadIamge.image = UIImage(data: User.UserHeadImage as Data)
+        }
+        
+        //昵称
+        if User.UserNickname == nil{
+            nickname.text = "点我设置"
+        }else{
+            nickname.text = User.UserNickname
+        }
+        
+    }
     
     
     /*

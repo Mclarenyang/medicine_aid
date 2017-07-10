@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
 
-class changeInfoViewController: UIViewController {
+class changeInfoViewController: UIViewController, UITextFieldDelegate {
     
     
     // 屏幕信息
@@ -17,6 +18,15 @@ class changeInfoViewController: UIViewController {
     
     //设置状态码（确定修改的是哪个信息）
     var key = 0
+    
+    var infoTextfield = UITextField()
+    
+    //
+    var checkBtn1 = UIButton()
+    var checkBtn2 = UIButton()
+    
+    let defaults = UserDefaults.standard
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +41,7 @@ class changeInfoViewController: UIViewController {
         
         //
         switch key {
-        case 0,1,4:
+        case 0,1,3,4:
             labelChange()
         case 2:
             chooseChange()
@@ -56,23 +66,65 @@ class changeInfoViewController: UIViewController {
         whiteView.backgroundColor = UIColor.white
         self.view.addSubview(whiteView)
         
-        let infoTextfield = UITextField(frame:CGRect(x:10,y:0,width:screenWidth-10,height:40))
+        infoTextfield = UITextField(frame:CGRect(x:10,y:0,width:screenWidth-10,height:40))
         infoTextfield.clearButtonMode = UITextFieldViewMode.whileEditing
         whiteView.addSubview(infoTextfield)
+        infoTextfield.delegate = self
+        
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
         
         //依然使用状态码识别
         switch key {
         case 0:
-            infoTextfield.text = "从数据库读取昵称"
+            infoTextfield.text = User.UserNickname
         case 1:
-            infoTextfield.text = "从数据库读取姓名"
+            infoTextfield.text = User.UserName
+        case 3:
+            infoTextfield.text = User.UserAge
         case 4:
-            infoTextfield.text = "从数据库读取电话"
+            infoTextfield.text = User.UserPhoneNum
         default:
             print("error")
         }
         
     }
+    
+    //修改信息 return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        realm.beginWrite()
+        
+        switch key {
+        case 0:
+            User.UserNickname = infoTextfield.text
+        case 1:
+            User.UserName = infoTextfield.text
+        case 3:
+            User.UserAge = infoTextfield.text
+        case 4:
+            User.UserPhoneNum = infoTextfield.text
+        default:
+            print("error")
+        }
+        
+        try! realm.commitWrite()
+        
+        textField.resignFirstResponder()
+        
+        _ = self.navigationController?.popViewController(animated: true)
+        
+        return true
+    }
+    
+    
     
     //使用选择修改性别
     func chooseChange() {
@@ -83,6 +135,14 @@ class changeInfoViewController: UIViewController {
         let whiteView2 = UIView(frame:CGRect(x:0,y:112,width:screenWidth,height:40))
         whiteView1.backgroundColor = UIColor.white
         whiteView2.backgroundColor = UIColor.white
+        let gesture1 = UITapGestureRecognizer()
+        gesture1.addTarget(self, action: #selector(tapMale))
+        let gesture2 = UITapGestureRecognizer()
+        gesture2.addTarget(self, action: #selector(tapFemale))
+        whiteView1.isUserInteractionEnabled = true
+        whiteView2.isUserInteractionEnabled = true
+        whiteView1.addGestureRecognizer(gesture1)
+        whiteView2.addGestureRecognizer(gesture2)
         self.view.addSubview(whiteView1)
         self.view.addSubview(whiteView2)
         
@@ -95,12 +155,14 @@ class changeInfoViewController: UIViewController {
         whiteView2.addSubview(femaleLabel)
         
         //button
-        let checkBtn1 = UIButton(frame:CGRect(x:screenWidth-30,y:10,width:20,height:20))
-        let checkBtn2 = UIButton(frame:CGRect(x:screenWidth-30,y:10,width:20,height:20))
+        checkBtn1 = UIButton(frame:CGRect(x:screenWidth-30,y:10,width:20,height:20))
+        checkBtn2 = UIButton(frame:CGRect(x:screenWidth-30,y:10,width:20,height:20))
         checkBtn1.setBackgroundImage(UIImage(named:"checkBtn"), for: .normal)
         checkBtn2.setBackgroundImage(UIImage(named:"checkBtn"), for: .normal)
         whiteView1.addSubview(checkBtn1)
         whiteView2.addSubview(checkBtn2)
+        
+        getSex()
         
     }
     
@@ -114,6 +176,8 @@ class changeInfoViewController: UIViewController {
             self.navigationItem.title = "姓名"
         case 2:
             self.navigationItem.title = "性别"
+        case 3:
+            self.navigationItem.title = "年龄"
         case 4:
             self.navigationItem.title = "电话"
         default:
@@ -125,8 +189,60 @@ class changeInfoViewController: UIViewController {
     //性别确认方法
     func getSex() {
         
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        if User.UserSex == "男"{
+            checkBtn2.isHidden = true
+        }else{
+            checkBtn1.isHidden = true
+        }
+        
     }
     
+    func tapMale() {
+        
+        let UserID = defaults.value(forKey: "UserID")!
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        if User.UserSex == "男"{
+            
+        }else{
+            realm.beginWrite()
+            User.UserSex = "男"
+            
+            try! realm.commitWrite()
+            
+            checkBtn1.isHidden = false
+            checkBtn2.isHidden = true
+            
+        }
+        _ = self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    func tapFemale() {
+        
+        let UserID = defaults.value(forKey: "UserID")!
+        let realm = try! Realm()
+        let User = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0]
+        
+        if User.UserSex == "女"{
+            
+        }else{
+            realm.beginWrite()
+            User.UserSex = "女"
+            
+            try! realm.commitWrite()
+            
+            checkBtn1.isHidden = true
+            checkBtn2.isHidden = false
+        }
+        _ = self.navigationController?.popViewController(animated: true)
+    }
 
     /*
     // MARK: - Navigation
