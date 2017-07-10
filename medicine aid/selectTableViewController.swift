@@ -9,6 +9,12 @@
 import UIKit
 
 class selectTableViewController: UITableViewController {
+    
+    
+    // 测试预设参数
+    let titles :[String] = ["昵称","姓名","性别","出生日期","电话号码"]
+    var indexI = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,25 +38,47 @@ class selectTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return titles.count
     }
 
-    /*
+    // tableview 加载cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        /// 定义cell
+        let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cellId")
+        // 读取数据
+        let title = titles[indexI]
+        
+        indexI += 1
+        
+        cell.textLabel?.text = title
+        cell.detailTextLabel?.text = "读取数据库"
+        
         return cell
     }
-    */
+  
+    // 点击跳转事件
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // 点击行
+        NSLog(String(indexPath.row))
+        
+        let rowIndex = indexPath.row
+        switch rowIndex {
+        case 0...2,4:
+            let infochange = changeInfoViewController()
+            infochange.key = rowIndex
+            self.navigationController?.pushViewController(infochange, animated: true)
+        case 3:
+            print("出生日期")
+        default:
+            print("无效操作")
+        }
+
+    }
 
     /*
     // Override to support conditional editing of the table view.

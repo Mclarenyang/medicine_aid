@@ -31,6 +31,7 @@
 		46E1056A1EBF357F00AB4D26 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E105691EBF357F00AB4D26 /* RootViewController.swift */; };
 		46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056C1EBF366600AB4D26 /* loginViewController.swift */; };
 		46E105701EBF5A3D00AB4D26 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */; };
+		46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */; };
 		8878CD66C77A758DEF3BBA8C /* Pods_medicine_aid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		46E105691EBF357F00AB4D26 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		46E1056C1EBF366600AB4D26 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changeInfoViewController.swift; sourceTree = "<group>"; };
 		4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_medicine_aid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			children = (
 				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
 				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
+				46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */,
 			);
 			name = viewLink2;
 			sourceTree = "<group>";
@@ -169,8 +172,8 @@
 		46E105531EBF354400AB4D26 /* medicine aid */ = {
 			isa = PBXGroup;
 			children = (
-				46E604F41ECA8AFB00A4B233 /* model */,
 				46E1056B1EBF365000AB4D26 /* main */,
+				46E604F41ECA8AFB00A4B233 /* model */,
 				46A132A41F0F773D004E3CE9 /* view */,
 				468958931EC3130C00E5DCED /* controller */,
 			);
@@ -365,6 +368,7 @@
 				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
 				46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */,
 				46BE6EBA1F0DD24E00D41852 /* QRCodeReader.swift in Sources */,
+				46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */,
 				46AC265B1EC3EB25007AEA36 /* tabBarButton.swift in Sources */,
 				468958951EC313B400E5DCED /* homeViewController.swift in Sources */,
 				46E1055D1EBF354400AB4D26 /* medicine_aid.xcdatamodeld in Sources */,

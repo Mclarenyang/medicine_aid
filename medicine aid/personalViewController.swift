@@ -9,13 +9,16 @@
 import UIKit
 import CocoaAsyncSocket
 
-class personalViewController: UIViewController , UIPopoverPresentationControllerDelegate {
+class personalViewController: UIViewController , UIPopoverPresentationControllerDelegate , UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     // 屏幕信息
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
 
     var rightbtn = UIButton()
+    
+    //头像
+    var personHeadIamge = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +46,15 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         bgView.addSubview(personView)
         
         // 设置头像
-        let personHeadIamge = UIImageView(frame:CGRect(x:screenWidth/12,y:screenHeight/10-45,width:90,height:90))
+        personHeadIamge = UIImageView(frame:CGRect(x:screenWidth/12,y:screenHeight/10-45,width:90,height:90))
         personHeadIamge.image = UIImage(named:"head") //读取处理
         personHeadIamge.layer.masksToBounds = true
         personHeadIamge.layer.cornerRadius = 45
+        personHeadIamge.isUserInteractionEnabled = true
+        let heardImageGeesture = UITapGestureRecognizer(target: self, action: #selector(personalHeard))
+        personHeadIamge.addGestureRecognizer(heardImageGeesture)
         personView.addSubview(personHeadIamge)
+        
         // 设置昵称
         let nickname = UILabel(frame: CGRect(x:screenWidth/9+100,y:screenHeight/10-45,width:300,height:100))
         nickname.font = UIFont.boldSystemFont(ofSize: 22)
@@ -66,6 +73,8 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         let infoView = UIView(frame: CGRect(x:0,y:screenHeight/2.05,width:screenWidth,height:screenHeight/2))
         infoView.backgroundColor = UIColor.white
         bgView.addSubview(infoView)
+        
+        
         //  设置按钮
         //   问诊记录
         let prescribeRecordBtn = UIButton(frame: CGRect(x:screenWidth*1/12,y:screenHeight/22,width:screenWidth*4.75/12,height:screenHeight/6))
@@ -139,6 +148,7 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         return .none
     }
     
+    //修改信息
     func personalInfo(){
         
         let personalInfoView = selectTableViewController()
@@ -146,6 +156,57 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         personalInfoView.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(personalInfoView, animated: true)
     }
+    
+    ///头像点击事件
+    func personalHeard(){
+    
+        let alert = UIAlertController(title: "修改头像", message: "", preferredStyle: .actionSheet)
+        let photoAction = UIAlertAction(title: "相册", style: .default , handler: { (action:UIAlertAction)in
+            self.photo()
+        })
+        let cameraAction = UIAlertAction(title: "相机", style: .default , handler: { (action:UIAlertAction)in
+            self.camera()
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel , handler: nil)
+        
+        alert.addAction(photoAction)
+        alert.addAction(cameraAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    // 相册方法
+    func photo(){
+        
+        let pick:UIImagePickerController = UIImagePickerController()
+        pick.delegate = self
+        pick.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(pick, animated: true, completion: nil)
+        
+    }
+    
+    func camera(){
+        
+        guard QRCodeReader.isDeviceAvailable() else{
+            let alert = UIAlertController(title: "Error", message: "相机无法使用", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        let pick:UIImagePickerController = UIImagePickerController()
+        pick.delegate = self
+        pick.sourceType = UIImagePickerControllerSourceType.camera
+        self.present(pick, animated: true, completion: nil)
+        
+    }
+    
+    
     
     /*
     // MARK: - Navigation

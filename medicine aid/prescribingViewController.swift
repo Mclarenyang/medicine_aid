@@ -14,11 +14,11 @@ import CocoaAsyncSocket
 class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSocketDelegate{
 
     var clientSocket:GCDAsyncSocket!
-    // 预设IP地址
-    //let beforeIP = "113.250.152.75"
-    let beforeIP = "192.168.2.141"
-    let beforePort = UInt16(5566)
     
+    // 预设IP地址
+    let beforeIP = "113.251.171.142"
+//    let beforeIP = "192.168.2.141"
+    let beforePort = UInt16(5566)
     
     // 屏幕信息
     let screenWidth = UIScreen.main.bounds.width
@@ -33,6 +33,12 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     var listHight = 0
     var viewTag = 1
     
+    //信息栏(UesrID用于区分并从数据库读数据)
+    var infoView = UIView()
+    var HeadIamge = UIImageView()
+    var patientId = "UserID"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,15 +51,10 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         self.view.addSubview(bgView)
         
         /// 顶部info
-        let infoView = UIView(frame: CGRect(x:0,y:64,width:screenWidth,height:screenHeight/5))
+        infoView = UIView(frame: CGRect(x:0,y:64,width:screenWidth,height:screenHeight/5))
         infoView.backgroundColor = UIColor.white
         bgView.addSubview(infoView)
-        // 设置头像
-        let HeadIamge = UIImageView(frame:CGRect(x:screenWidth*8/12,y:screenHeight/10-45,width:90,height:90))
-        HeadIamge.image = UIImage(named:"head") //读取处理
-        HeadIamge.layer.masksToBounds = true
-        HeadIamge.layer.cornerRadius = 45
-        infoView.addSubview(HeadIamge)
+        infoBox()
         
         /// 设置添加药方view
         let addBgView = UIView(frame: CGRect(x:0,y:screenHeight/5 + 69 ,width:screenWidth,height:screenHeight*4/5))
@@ -66,7 +67,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         
         
         // 设置输入框
-        MedicineName = HoshiTextField(frame:CGRect(x:0, y:0, width:(screenWidth - 40)/2, height:50))
+        MedicineName = HoshiTextField(frame:CGRect(x:5, y:0, width:(screenWidth - 40)/2-5, height:50))
         MedicineName.placeholder = "名称"
         MedicineName.borderActiveColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
         MedicineName.autocorrectionType = UITextAutocorrectionType.no
@@ -75,7 +76,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         MedicineName.keyboardAppearance = UIKeyboardAppearance.light
         addBgView.addSubview(MedicineName)
         //
-        MedicineWeight = HoshiTextField(frame:CGRect(x:(screenWidth - 40)/2, y:0, width:(screenWidth - 40)/2, height:50))
+        MedicineWeight = HoshiTextField(frame:CGRect(x:(screenWidth - 40)/2-5, y:0, width:(screenWidth - 40)/2-5, height:50))
         MedicineWeight.placeholder = "重量(g)"
         MedicineWeight.borderActiveColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
         MedicineWeight.autocorrectionType = UITextAutocorrectionType.no
@@ -101,6 +102,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         
         // 链接
         TCPLink(IPAddr: beforeIP, serverPort: beforePort)
+        
         // Do any additional setup after loading the view.
         
     }
@@ -109,6 +111,39 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func infoBox() {
+        
+        // 设置头像
+        HeadIamge = UIImageView(frame:CGRect(x:screenWidth*8/12,y:screenHeight/10-45,width:90,height:90))
+        HeadIamge.image = UIImage(named:"head") //读取处理
+        HeadIamge.layer.masksToBounds = true
+        HeadIamge.layer.cornerRadius = 45
+        infoView.addSubview(HeadIamge)
+        
+        // 设置别的信息
+        let patientname = UILabel(frame:CGRect(x:screenWidth*1/12,y:screenHeight/10-55,width:90,height:90))
+        let patientSex = UILabel(frame:CGRect(x:screenWidth*4/12,y:screenHeight/10-55,width:90,height:90))
+        let patientAge = UILabel(frame:CGRect(x:screenWidth*5/12,y:screenHeight/10-55,width:90,height:90))
+        let patientTime = UILabel(frame:CGRect(x:screenWidth*1/12,y:screenHeight/10-25,width:200,height:70))
+        patientTime.textColor = UIColor.gray
+        
+        infoView.addSubview(patientname)
+        infoView.addSubview(patientSex)
+        infoView.addSubview(patientAge)
+        infoView.addSubview(patientTime)
+        
+        //测试设置
+        patientname.text = "黄日狗"
+        patientSex.text = "男"
+        patientAge.text = "34岁"
+        patientTime.text = "挂号时间：2:30"
+        
+        
+    }
+    
+    
     
     // 按钮事件(添加药物条目)
     func addBtnTap(_ button:UIButton){
@@ -173,6 +208,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         viewTag = viewTag - 1
     }
 
+    
     // TCP链接
     func TCPLink(IPAddr: String,serverPort: UInt16){
         // 设置IP地址 IPAddr
@@ -186,6 +222,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
             NSLog("连接失败")
         }
     }
+    
     
     //链接成功
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
@@ -227,9 +264,17 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) -> Void {
         // 获取发来的数据，把 NSData 转 NSString
         let readClientDataString: NSString? = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue)
-        NSLog("-Data Recv-")
-        NSLog(readClientDataString as! String)
+            NSLog("-Data Recv-")
         
+        if readClientDataString == nil {
+            
+            NSLog("error:接收到空字符")
+            
+        }else{
+            
+            NSLog(readClientDataString as! String)
+            
+        }
         // 处理请求，返回数据OK
         let serviceStr: NSMutableString = NSMutableString()
         serviceStr.append("OK\n")
@@ -243,7 +288,14 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     func DoneBtn(_ button:UIButton){
         
         let serviceStr: NSMutableString = NSMutableString()
-        serviceStr.append("OPEN")
+        
+        //获取数据
+        let data = dataFlow()
+        serviceStr.append(data)
+        NSLog(data)
+        
+        
+        //serviceStr.append("OPEN")
         //serviceStr.append("\n")
         clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
         clientSocket.readData(withTimeout: -1, tag: 0)
@@ -278,7 +330,20 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
+    // 读取最终数据
+    func dataFlow() -> String {
+        
+        var data = "ID1:"
+        
+        for index in 1...viewTag - 1{
+        
+            let list = view.viewWithTag(index) as! medicalListView
+            
+            data = data + list.medicineName.text! + ":" + list.medicineWeight.text! + ";"
+            
+        }
+        return data
+    }
     
     /*
     // MARK: - Navigation
