@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.4.0)
   - CocoaAsyncSocket (7.6.1)
+  - CryptoSwift (0.6.9)
   - Realm (2.8.3):
     - Realm/Headers (= 2.8.3)
   - Realm/Headers (2.8.3)
@@ -12,18 +13,30 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4.0)
   - CocoaAsyncSocket (~> 7.6.0)
+  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
   - RealmSwift (~> 2.8.0)
   - SwiftyJSON (~> 3.1.4)
   - TextFieldEffects (~> 1.3.2)
 
+EXTERNAL SOURCES:
+  CryptoSwift:
+    :branch: master
+    :git: https://github.com/krzyzanowskim/CryptoSwift
+
+CHECKOUT OPTIONS:
+  CryptoSwift:
+    :commit: 631daed451c7de34fb89b903c1e6dcd1cbaecd5a
+    :git: https://github.com/krzyzanowskim/CryptoSwift
+
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
+  CryptoSwift: 138d0ffbc0c5ee40f7b7fc7b073c0f41e5d36dba
   Realm: 3601ef091c8c499a31101d8563b991e75546cdce
   RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: 862708c955a012d3b367d9deff347d99a4896e42
+PODFILE CHECKSUM: 8fea6fbc37ee5cb4eedd11268b856e93d048ec37
 
 COCOAPODS: 1.2.1

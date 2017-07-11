@@ -274,6 +274,21 @@ class personalViewController: UIViewController , UIPopoverPresentationController
             nickname.text = User.UserNickname
         }
         
+        
+        //填充空值
+        realm.beginWrite()
+        
+        if User.UserAge == nil{
+            User.UserAge = "20"
+        }
+        if User.UserName == nil{
+            User.UserName = "点我设置姓名"
+        }
+        if User.UserSex == nil{
+            User.UserSex = "男"
+        }
+        
+        try! realm.commitWrite()
     }
     
     

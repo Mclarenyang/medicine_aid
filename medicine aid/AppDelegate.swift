@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
         }
         
+        /*
         //录入测试数据
         let textUser = UserText()
         
@@ -61,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //数据库地址
         print(realm.configuration.fileURL!)
+        
+        */
         
         return true
     }

@@ -13,6 +13,7 @@
 		468958A51EC3564900E5DCED /* queueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A41EC3564900E5DCED /* queueViewController.swift */; };
 		468958A71EC357A600E5DCED /* personalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A61EC357A600E5DCED /* personalViewController.swift */; };
 		468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B0D301EC55109001CDFCD /* aboutUsViewController.swift */; };
+		468C12131F147720002D5D7E /* AESEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C12121F147720002D5D7E /* AESEncoding.swift */; };
 		46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A132A51F0F784A004E3CE9 /* medicalListView.swift */; };
 		46AC265B1EC3EB25007AEA36 /* tabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265A1EC3EB25007AEA36 /* tabBarButton.swift */; };
 		46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AC265C1EC3EEA7007AEA36 /* tabBar.swift */; };
@@ -51,6 +52,8 @@
 		468958A41EC3564900E5DCED /* queueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = queueViewController.swift; sourceTree = "<group>"; };
 		468958A61EC357A600E5DCED /* personalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = personalViewController.swift; sourceTree = "<group>"; };
 		468B0D301EC55109001CDFCD /* aboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutUsViewController.swift; sourceTree = "<group>"; };
+		468C12121F147720002D5D7E /* AESEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AESEncoding.swift; sourceTree = "<group>"; };
+		468C12141F147CC2002D5D7E /* NewPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = NewPlayground.playground; sourceTree = "<group>"; };
 		46A132A51F0F784A004E3CE9 /* medicalListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicalListView.swift; sourceTree = "<group>"; };
 		46AC265A1EC3EB25007AEA36 /* tabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarButton.swift; sourceTree = "<group>"; };
 		46AC265C1EC3EEA7007AEA36 /* tabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBar.swift; sourceTree = "<group>"; };
@@ -111,6 +114,15 @@
 				461A64A51EC6CC4F00F554B6 /* FrameworkcControllers */,
 			);
 			name = controller;
+			sourceTree = "<group>";
+		};
+		468C12111F1476EC002D5D7E /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				468C12121F147720002D5D7E /* AESEncoding.swift */,
+				468C12141F147CC2002D5D7E /* NewPlayground.playground */,
+			);
+			name = supporting;
 			sourceTree = "<group>";
 		};
 		46A132A21F0F76AA004E3CE9 /* viewLink1 */ = {
@@ -191,6 +203,7 @@
 				46E105601EBF354400AB4D26 /* LaunchScreen.storyboard */,
 				46E105631EBF354400AB4D26 /* Info.plist */,
 				46E1055B1EBF354400AB4D26 /* medicine_aid.xcdatamodeld */,
+				468C12111F1476EC002D5D7E /* supporting */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -368,6 +381,7 @@
 				46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */,
 				468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */,
 				46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */,
+				468C12131F147720002D5D7E /* AESEncoding.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,
 				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
 				46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */,

@@ -8,6 +8,9 @@
 
 import UIKit
 import TextFieldEffects
+import Alamofire
+import SwiftyJSON
+import RealmSwift
 
 
 class loginViewController: UIViewController,UITextFieldDelegate {
@@ -16,6 +19,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    // 电话
+    var phoneText = MadokaTextField()
     // 密码栏
     var passwordText = MadokaTextField()
     
@@ -42,7 +47,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         bgImageView.addSubview(iconImageView)
         
         // 创建textfiled
-        let phoneText = MadokaTextField(frame:CGRect(x:50,y:screenHeight*2.5/7,width:screenWidth-100,height:50))
+        phoneText = MadokaTextField(frame:CGRect(x:50,y:screenHeight*2.5/7,width:screenWidth-100,height:50))
         phoneText.placeholder = "电话"
         phoneText.borderColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
         phoneText.autocorrectionType = UITextAutocorrectionType.no
@@ -107,12 +112,68 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     // 进入主界面
     func homeViewTap(_ button:UIButton){
         
-        // 模态弹出
-        let homeView = mainTabbarController()
-        self.navigationController?.pushViewController(homeView, animated: true)
+        //加密
+        let passWord = AESEncoding.Endcode_AES_ECB(strToEncode: passwordText.text!, typeCode: .passWord)
+        let phoneNumber = AESEncoding.Endcode_AES_ECB(strToEncode: phoneText.text!, typeCode: .phoneNumber)
         
+        let parameters: Parameters = [
+            "password": passWord,
+            "phoneNumber": phoneNumber
+        ]
+        
+        //网络请求
+        let url = "http://120.77.87.78:8080/igds/app/user/signIn"
+        
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
+
+            classStudents in
+            
+            if let value = classStudents.result.value{
+                
+                let json = JSON(value)
+                //
+                print(json)
+                
+                let code = json["code"]
+        
+                switch code{
+                case 404:
+                    print("电话号码错误")
+                case 422:
+                    print("密码错误")
+                case 200:
+                    print("登录成功")
+                    
+                    let body = json["body"]
+                
+                    //录入数据
+                    let textUser = UserText()
+                    
+                    textUser.UserID = String(describing: body["idString"])
+                    textUser.UserNickname = AESEncoding.Decode_AES_ECB(strToDecode: String(describing: body["nickName"]), typeCode: .nickName)
+                    textUser.UserPhoneNum = AESEncoding.Decode_AES_ECB(strToDecode: String(describing: body["phoneNumber"]), typeCode: .phoneNumber)
+                    textUser.UserType = String(describing: body["type"])
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        realm.add(textUser, update: true)
+                    }
+                    
+                    let defaults = UserDefaults.standard
+                    defaults.set(textUser.UserID, forKey: "UserID")
+                    
+                    // push 主界面
+                    let homeView = mainTabbarController()
+                    self.navigationController?.pushViewController(homeView, animated: true)
+
+                    
+                default:
+                    print("遇到未知错误")
+                    
+                }
+            }
+        }
     }
-    
     // 显示密码
     func showPassWords(_ button:UIButton){
         
@@ -124,6 +185,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*
