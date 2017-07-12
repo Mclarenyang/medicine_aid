@@ -296,9 +296,32 @@ class personalViewController: UIViewController , UIPopoverPresentationController
     //二维码跳转
     func QRViewTap() {
         
-        let QRView = doctorQRViewController()
-        QRView.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(QRView, animated: true)
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        //读Type
+        let realm = try! Realm()
+        
+        let type = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserType
+        
+        //判断权限
+        if type == "doctor" {
+            
+             let QRView = doctorQRViewController()
+            QRView.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(QRView, animated: true)
+            
+        }else{
+            
+            //警告
+            let alert = UIAlertController(title: "警告", message: "没有权限", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+       
         
     }
     

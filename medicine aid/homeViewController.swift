@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class homeViewController: UIViewController,UIScrollViewDelegate {
     
@@ -184,11 +185,34 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
     // 跳转事件
     func prescribeBtnTap(_ button:UIButton){
         
-        /// push界面
-        let queueView = queueViewController()
-        // 隐藏tabbar
-        queueView.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(queueView, animated: true)
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        //读Type
+        let realm = try! Realm()
+        
+        let type = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserType
+        
+        if type == "doctor" {
+            
+            /// push界面
+            let queueView = queueViewController()
+            queueView.doctorID = UserID as! String
+            // 隐藏tabbar
+            queueView.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(queueView, animated: true)
+            
+        }else{
+        
+            //警告
+            let alert = UIAlertController(title: "警告", message: "没有权限", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        
+        }
         
     }
     

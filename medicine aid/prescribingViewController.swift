@@ -10,6 +10,8 @@
 import UIKit
 import TextFieldEffects
 import CocoaAsyncSocket
+import Alamofire
+import SwiftyJSON
 
 class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSocketDelegate{
 
@@ -36,8 +38,10 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     //信息栏(UesrID用于区分并从数据库读数据)
     var infoView = UIView()
     var HeadIamge = UIImageView()
-    var patientId = "UserID"
     
+    //ID
+    var doctorId = ""
+    var patientId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -299,6 +303,9 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         //serviceStr.append("\n")
         clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
         clientSocket.readData(withTimeout: -1, tag: 0)
+        
+        //断开链接
+        cancelPatient()
     }
     
     // 设置另一个弹窗
@@ -343,6 +350,53 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
             
         }
         return data
+    }
+    
+    //断开患者
+    func cancelPatient() {
+        
+        ///在这里断开医生和患者链接
+        let url = AESEncoding.myURL + "igds/app/link/cancle"
+        let parameters:Parameters = [
+            "doctorId": doctorId,
+            "patientId": patientId
+        ]
+        
+        print("提交参数:\(parameters)")
+        
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
+            classValue in
+            
+            if let value = classValue.result.value{
+                
+                let json = JSON(value)
+                let code = json["code"]
+                
+                print("断开患者code:\(code)")
+                //判断是否提交成功
+                if code == 204{
+                    
+                    let alert = UIAlertController(title: "提示", message: "提交成功", preferredStyle: .alert)
+                    let doneAction = UIAlertAction(title: "好", style: .default, handler: {
+                        action in
+                        
+                        _ = self.navigationController?.popViewController(animated: true)
+                        
+                    })
+                    
+                    alert.addAction(doneAction)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }else{
+                    
+                    let alert = UIAlertController(title: "Error", message: "提交失败", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "好", style: .cancel, handler: nil)
+                    
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     /*

@@ -25,6 +25,7 @@
 		46BE6EBD1F0DD24E00D41852 /* QRCodeReaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46BE6EB81F0DD24E00D41852 /* QRCodeReaderView.xib */; };
 		46BE6EBE1F0DD24E00D41852 /* QRCodeReader.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46BE6EB91F0DD24E00D41852 /* QRCodeReader.xcassets */; };
 		46C7C4151ECA9D7300EB600A /* selectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */; };
+		46CA47D91F15FD7C00A30FC5 /* DoctorQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA47D81F15FD7C00A30FC5 /* DoctorQR.swift */; };
 		46E105551EBF354400AB4D26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E105541EBF354400AB4D26 /* AppDelegate.swift */; };
 		46E1055D1EBF354400AB4D26 /* medicine_aid.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46E1055B1EBF354400AB4D26 /* medicine_aid.xcdatamodeld */; };
 		46E1055F1EBF354400AB4D26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E1055E1EBF354400AB4D26 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		46BE6EB81F0DD24E00D41852 /* QRCodeReaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodeReaderView.xib; sourceTree = "<group>"; };
 		46BE6EB91F0DD24E00D41852 /* QRCodeReader.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = QRCodeReader.xcassets; sourceTree = "<group>"; };
 		46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectTableViewController.swift; sourceTree = "<group>"; };
+		46CA47D81F15FD7C00A30FC5 /* DoctorQR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorQR.swift; sourceTree = "<group>"; };
 		46E105511EBF354400AB4D26 /* medicine aid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "medicine aid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E105541EBF354400AB4D26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46E1055C1EBF354400AB4D26 /* medicine_aid.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = medicine_aid.xcdatamodel; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				46EC2ACB1F136493006AE02A /* UserTest.swift */,
+				46CA47D81F15FD7C00A30FC5 /* DoctorQR.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				46C7C4151ECA9D7300EB600A /* selectTableViewController.swift in Sources */,
 				46AC265F1EC3F127007AEA36 /* tabBarViewController.swift in Sources */,
 				461A64A71EC7050C00F554B6 /* prescribingViewController.swift in Sources */,
+				46CA47D91F15FD7C00A30FC5 /* DoctorQR.swift in Sources */,
 				468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */,
 				468958A51EC3564900E5DCED /* queueViewController.swift in Sources */,
 				46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */,

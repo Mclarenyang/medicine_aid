@@ -8,7 +8,9 @@ import CryptoSwift
 
 
 //密钥字符串
-let key = "nmid.igds.nick_name"
+//let key = "nmid.igds.nick_name"
+let key = "nmid.igds.phone_number"
+//let key = "nmid.igds.password"
 
 //md5加密
 let hash = key.md5()
@@ -30,7 +32,9 @@ let encode = encrypted.toHexString()
 //密钥字符串(字符串 1)进行 MD5 加密后，得到一组新的字符串(字符串 2)， 将字符串 2 打散成为 byte 数组，并用此数组对需要解密的字符串(字符串 4)进行 AES 解密，得到解密字符串(字符串 3)
 
 //接收到的数据
-let data = Array<UInt8>(hex: encode)
+let my = "ed3745a30ebda266b134fecdc0e8ba23"
+
+let data = Array<UInt8>(hex: my)
 
 //解密
 let decrypted = try AES(key: byteKey, iv: iv, blockMode: .ECB, padding: PKCS7()).decrypt(data)

@@ -18,6 +18,9 @@ enum typeCode{
 
 class AESEncoding: NSObject {
     
+    
+    static let myURL = "http://120.77.87.78:8080/"
+    
     //AES-ECB加密
     static func Endcode_AES_ECB(strToEncode:String, typeCode: typeCode)->String
     {

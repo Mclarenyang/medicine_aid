@@ -173,12 +173,12 @@ class registerViewController: UINavigationController,UITextFieldDelegate{
             "type": type
         ]
         
-        let url = "http://120.77.87.78:8080/igds/app/user/signUp"
+        let url = AESEncoding.myURL + "igds/app/user/signUp"
         
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
-            classStudents in
+            classUser in
             
-            if let value = classStudents.result.value{
+            if let value = classUser.result.value{
                 
                 let json = JSON(value)
                 

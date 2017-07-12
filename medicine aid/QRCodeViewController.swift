@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class QRCodeViewController: UIViewController {
+    
+    
+    static var QRResult = ""
     
     
     fileprivate lazy var topBar: UINavigationBar = {
@@ -41,6 +46,7 @@ class QRCodeViewController: UIViewController {
     convenience init(completion: QRCodeReaderCompletion?) {
         self.init()
         self.completion = completion
+        
     }
 }
 
@@ -154,8 +160,76 @@ extension QRCodeViewController{
             let first = features.first as? CIQRCodeFeature{
             self.completionFor(result: first.messageString, isCancel: false)
             
-            //相册扫描结果
+            ///相册扫描结果
             NSLog(first.messageString!)
+            QRCodeViewController.QRResult = first.messageString!
+            
+            //ID
+            let defaults = UserDefaults.standard
+            let UserID = defaults.value(forKey: "UserID")!
+            
+            //直接链接
+            //提示
+            let alert = UIAlertController(title: "提示", message: "确定挂号排队?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let doneAction = UIAlertAction(title: "好", style: .default, handler: {
+                action in
+                
+                let url = AESEncoding.myURL + "igds/app/link"
+                
+                let parameters: Parameters = [
+                    "doctorId":first.messageString!,
+                    "patientId":UserID
+                ]
+                
+                
+                Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
+                    classValue in
+                    
+                    if let value = classValue.result.value{
+                        
+                        let json = JSON(value)
+                        let code = json["code"]
+                        
+                        print("患者挂号code:\(code)")
+                        
+                        if code == 201{
+                            let queueView = queueViewController()
+                            queueView.doctorID = first.messageString!
+                            self.navigationController?.pushViewController(queueView, animated: true)
+                            
+                        }else if code == 403{
+                            
+                            let alert = UIAlertController(title: "提示", message: "您已经挂号，请勿重复提交", preferredStyle: .alert)
+                            let doneAction = UIAlertAction(title: "好", style: .default, handler:{
+                                action in
+                                
+                                _ = self.navigationController?.popViewController(animated: true)
+                                
+                            })
+                            alert.addAction(doneAction)
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }else{
+                            
+                            let alert = UIAlertController(title: "链接错误，", message: "请联系技术人员", preferredStyle: .alert)
+                            let doneAction = UIAlertAction(title: "好", style: .default, handler:{
+                                action in
+                                
+                                _ = self.navigationController?.popViewController(animated: true)
+                                
+                            })
+                            alert.addAction(doneAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            
+            })
+            
+            alert.addAction(cancelAction)
+            alert.addAction(doneAction)
+            self.present(alert, animated: true, completion: nil)
             
         }
     }

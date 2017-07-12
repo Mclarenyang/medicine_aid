@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
+import Alamofire
+import SwiftyJSON
 
 class doctorQRViewController: UIViewController {
     
@@ -44,6 +47,8 @@ class doctorQRViewController: UIViewController {
         //doneBtn.addTarget(self, action: #selector() , for: UIControlEvents.touchUpInside)
         self.view.addSubview(doneBtn)
         
+        updateDoctorQR()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -53,6 +58,29 @@ class doctorQRViewController: UIViewController {
     }
     
 
+    // 更新二维码
+    func updateDoctorQR() {
+    
+        //读取ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+
+            
+            let url = AESEncoding.myURL + "igds/app/link/QR.png"
+            let parameters: Parameters = ["idString": UserID]
+        
+            Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
+                classValue in
+     
+                if let data = classValue.data{
+                    
+                    self.QRImage.image = UIImage(data: data)
+
+            }
+        }
+    
+    }
+    
     /*
     // MARK: - Navigation
 

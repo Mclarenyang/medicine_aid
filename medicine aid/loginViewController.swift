@@ -112,11 +112,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     // 进入主界面
     func homeViewTap(_ button:UIButton){
         
-        // push 主界面
+        /* push 主界面
         let homeView = mainTabbarController()
         self.navigationController?.pushViewController(homeView, animated: true)
         
-        /*
+        */
         //加密
         let passWord = AESEncoding.Endcode_AES_ECB(strToEncode: passwordText.text!, typeCode: .passWord)
         let phoneNumber = AESEncoding.Endcode_AES_ECB(strToEncode: phoneText.text!, typeCode: .phoneNumber)
@@ -127,19 +127,19 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         ]
         
         //网络请求
-        let url = "http://120.77.87.78:8080/igds/app/user/signIn"
+        let url = AESEncoding.myURL + "igds/app/user/signIn"
         
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
 
-            classStudents in
+            classUser in
             
-            if let value = classStudents.result.value{
+            if let value = classUser.result.value{
                 
                 let json = JSON(value)
-                //
-                print(json)
                 
                 let code = json["code"]
+                
+                print("登录code:\(code)")
         
                 switch code{
                 case 404:
@@ -175,13 +175,17 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     textUser.UserPhoneNum = AESEncoding.Decode_AES_ECB(strToDecode: String(describing: body["phoneNumber"]), typeCode: .phoneNumber)
                     textUser.UserType = String(describing: body["type"])
                     
+                    
                     let realm = try! Realm()
                     try! realm.write {
                         realm.add(textUser, update: true)
                     }
+         
+
                     
                     let defaults = UserDefaults.standard
                     defaults.set(textUser.UserID, forKey: "UserID")
+                    
                     
                     // push 主界面
                     let homeView = mainTabbarController()
@@ -200,7 +204,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                 }
             }
         }
- */
+
     }
     
     // 显示密码
