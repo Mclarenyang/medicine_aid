@@ -75,6 +75,9 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         /// 设置中间条目
         let numView = UIView(frame: CGRect(x:0,y:screenHeight/3.25,width:screenWidth,height:screenHeight/6))
         numView.backgroundColor = UIColor.white
+        numView.isUserInteractionEnabled = true
+        let gestureQR = UITapGestureRecognizer(target: self, action: #selector(QRViewTap))
+        numView.addGestureRecognizer(gestureQR)
         bgView.addSubview(numView)
         
         /// 设置info按钮view
@@ -120,8 +123,7 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         // Dispose of any resources that can be recreated.
     }
     
-    // 按键响应事件
-    
+    /// 按键响应事件
     // 服药提醒
     func cautionBtnTap(_ button:UIButton){
         
@@ -291,6 +293,14 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         try! realm.commitWrite()
     }
     
+    //二维码跳转
+    func QRViewTap() {
+        
+        let QRView = doctorQRViewController()
+        QRView.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(QRView, animated: true)
+        
+    }
     
     /*
     // MARK: - Navigation

@@ -32,6 +32,7 @@
 		46E1056A1EBF357F00AB4D26 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E105691EBF357F00AB4D26 /* RootViewController.swift */; };
 		46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056C1EBF366600AB4D26 /* loginViewController.swift */; };
 		46E105701EBF5A3D00AB4D26 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */; };
+		46E2F49C1F15C3310075DC4F /* doctorQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2F49B1F15C3310075DC4F /* doctorQRViewController.swift */; };
 		46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */; };
 		46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC2ACB1F136493006AE02A /* UserTest.swift */; };
 		8878CD66C77A758DEF3BBA8C /* Pods_medicine_aid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */; };
@@ -74,6 +75,7 @@
 		46E105691EBF357F00AB4D26 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		46E1056C1EBF366600AB4D26 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		46E1056F1EBF5A3D00AB4D26 /* registerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		46E2F49B1F15C3310075DC4F /* doctorQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorQRViewController.swift; sourceTree = "<group>"; };
 		46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changeInfoViewController.swift; sourceTree = "<group>"; };
 		46EC2ACB1F136493006AE02A /* UserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
 		4EB5B025D8D829AE48C7118A /* Pods_medicine_aid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_medicine_aid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 		46A132A31F0F7709004E3CE9 /* viewLink2 */ = {
 			isa = PBXGroup;
 			children = (
+				46E2F49B1F15C3310075DC4F /* doctorQRViewController.swift */,
 				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
 				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
 				46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */,
@@ -384,6 +387,7 @@
 				468C12131F147720002D5D7E /* AESEncoding.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,
 				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
+				46E2F49C1F15C3310075DC4F /* doctorQRViewController.swift in Sources */,
 				46E1056D1EBF366600AB4D26 /* loginViewController.swift in Sources */,
 				46BE6EBA1F0DD24E00D41852 /* QRCodeReader.swift in Sources */,
 				46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */,

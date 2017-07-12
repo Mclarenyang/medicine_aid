@@ -112,6 +112,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     // 进入主界面
     func homeViewTap(_ button:UIButton){
         
+        // push 主界面
+        let homeView = mainTabbarController()
+        self.navigationController?.pushViewController(homeView, animated: true)
+        
+        /*
         //加密
         let passWord = AESEncoding.Endcode_AES_ECB(strToEncode: passwordText.text!, typeCode: .passWord)
         let phoneNumber = AESEncoding.Endcode_AES_ECB(strToEncode: phoneText.text!, typeCode: .phoneNumber)
@@ -138,9 +143,25 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         
                 switch code{
                 case 404:
+                    
                     print("电话号码错误")
+                    let alert = UIAlertController(title: "Error", message: "电话号码未注册", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                        _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 case 422:
+                    
                     print("密码错误")
+                    let alert = UIAlertController(title: "Error", message: "密码错误", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                        _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 case 200:
                     print("登录成功")
                     
@@ -169,11 +190,19 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     
                 default:
                     print("遇到未知错误")
+                    let alert = UIAlertController(title: "Error", message: "遇到未知错误", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                        _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                     
                 }
             }
         }
+ */
     }
+    
     // 显示密码
     func showPassWords(_ button:UIButton){
         
