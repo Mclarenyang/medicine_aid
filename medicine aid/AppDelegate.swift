@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +38,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.backgroundColor = UIColor.white
             self.window?.makeKeyAndVisible()
         }
+        
+        /*
+        //录入测试数据
+        let textUser = UserText()
+        
+        textUser.UserID = "text"
+        textUser.UserName = "黄力宏"
+        textUser.UserNickname = "点我设置"
+        textUser.UserSex = "男"
+        textUser.UserAge = "35"
+        textUser.UserPhoneNum = "18883992485"
+        textUser.UserType = "P"
+        textUser.UserHeadImage = UIImagePNGRepresentation(UIImage(named:"SettingHeardImage")!) as NSData!
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(textUser, update: true)
+        }
+
+        let defaults = UserDefaults.standard
+        defaults.set(textUser.UserID, forKey: "UserID")
+        
+        //数据库地址
+        print(realm.configuration.fileURL!)
+        
+        */
+        
         return true
     }
 

@@ -25,14 +25,14 @@ class searchingMedicineViewController: UIViewController,UISearchBarDelegate {
         self.navigationItem.title = "药材百科"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
-        // 创建搜索框
-        let searchingbar = UISearchBar(frame:CGRect(x:0, y:64, width:screenWidth, height:30))
-        searchingbar.keyboardType = UIKeyboardType.alphabet
-        searchingbar.placeholder = "输入药材名称"
-        self.view.addSubview(searchingbar)
+//        // 创建搜索框
+//        let searchingbar = UISearchBar(frame:CGRect(x:0, y:64, width:screenWidth, height:30))
+//        searchingbar.keyboardType = UIKeyboardType.alphabet
+//        searchingbar.placeholder = "输入药材名称"
+//        self.view.addSubview(searchingbar)
         
         /// 设置网页
-        let searchingWebView = UIWebView(frame: CGRect(x:0,y:94,width:screenWidth,height:screenHeight-64))
+        let searchingWebView = UIWebView(frame: CGRect(x:0,y:0,width:screenWidth,height:screenHeight))
         self.view.addSubview(searchingWebView)
         
         let webAddress = "http://baike.baidu.com/item/%E5%BD%93%E5%BD%92"

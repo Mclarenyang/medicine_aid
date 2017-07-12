@@ -18,7 +18,7 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tableView: UITableView!
     
     // 测试预设参数
-    let anm :[(String,String)] = [("大象","2:15"),("兔子","3:00"),("松鼠",""),("河豚",""),("袋鼠",""),("袋熊","")]
+    let anm :[(String,String)] = [("大象","2:15"),("兔子","3:00"),("松鼠","3:40"),("河豚","4:00"),("袋鼠","4:02"),("袋熊","5:00")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
