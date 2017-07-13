@@ -63,6 +63,111 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    //编辑权限
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //删除按钮
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        //读Type
+        let realm = try! Realm()
+        
+        let type = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserType
+        
+        guard type != "doctor" else {
+            return "删除挂号"
+        }
+        
+        guard type != "patient" else {
+            return "取消挂号"
+        }
+        
+        return "error"
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        self.tableView!.deselectRow(at: indexPath, animated: true)
+       
+    }
+    
+    //删除行
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        print("选中的Cell 为\(self.anmtest[indexPath.row])")
+        
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        //读Type
+        let realm = try! Realm()
+        
+        let type = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserType
+
+        guard type != "doctor" else{
+            
+            //提示
+            let alert = UIAlertController(title: "提示", message: "确定挂号排队?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let doneAction = UIAlertAction(title: "好", style: .default, handler: {
+                action in
+            
+            self.cancelLink(CdoctorID: UserID as! String, CpatientId: self.anmtest[indexPath.row].2, type: "删除")
+            
+        })
+                alert.addAction(cancelAction)
+                alert.addAction(doneAction)
+                self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        guard type != "patient" else {
+          
+            if UserID as! String == self.anmtest[indexPath.row].2 {
+                
+                //提示
+                let alert = UIAlertController(title: "提示", message: "确定挂号排队?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                let doneAction = UIAlertAction(title: "好", style: .default, handler: {
+                    action in
+                    
+                   self.cancelLink(CdoctorID: self.doctorID, CpatientId: self.anmtest[indexPath.row].2, type: "取消")
+                    
+                })
+                alert.addAction(cancelAction)
+                alert.addAction(doneAction)
+                self.present(alert, animated: true, completion: nil)
+                
+             
+                
+            }else{
+            
+                //警告
+                let alert = UIAlertController(title: "警告", message: "没有权限", preferredStyle: .alert)
+                let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            return
+        }
+        
+        refreshTableView()
+    }
+    
     // tableview行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return screenHeight/10
@@ -110,14 +215,13 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let prescribingView = prescribingViewController()
             prescribingView.doctorId = self.doctorID
             prescribingView.patientId = self.anmtest[indexPath.row].2
+            prescribingView.nickname = self.anmtest[indexPath.row].0
+            prescribingView.phonenumber = self.anmtest[indexPath.row].1
             self.navigationController?.pushViewController(prescribingView, animated: true)
             
-        }else if self.anmtest[indexPath.row].3 == ""{
-            
-            //啥也不做
-            
         }else{
-        //警告
+            
+            //警告
             let alert = UIAlertController(title: "警告", message: "没有权限", preferredStyle: .alert)
             let action = UIAlertAction(title: "好", style: .default, handler: nil)
             
@@ -182,6 +286,54 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
         }
+    }
+    
+    //删除医患链接
+    func cancelLink(CdoctorID:String, CpatientId:String, type: String) {
+        
+        ///在这里断开医生和患者链接
+        let url = AESEncoding.myURL + "igds/app/link/cancle"
+        let parameters:Parameters = [
+            "doctorId": CdoctorID,
+            "patientId": CpatientId
+        ]
+        
+        print("提交参数:\(parameters)")
+        
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON{
+            classValue in
+            
+            if let value = classValue.result.value{
+                
+                let json = JSON(value)
+                let code = json["code"]
+                
+                print("断开患者code:\(code)")
+                //判断是否提交成功
+                if code == 204{
+                    
+                    let alert = UIAlertController(title: "提示", message: "\(type)成功", preferredStyle: .alert)
+                    let doneAction = UIAlertAction(title: "好", style: .default, handler: {
+                        action in
+                        
+                    })
+                    
+                    alert.addAction(doneAction)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }else{
+                    
+                    let alert = UIAlertController(title: "Error", message: "\(type)失败", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "好", style: .cancel, handler: nil)
+                    
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+
+        refreshTableView()
+        
     }
     
     

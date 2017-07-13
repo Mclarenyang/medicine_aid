@@ -73,8 +73,8 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         getPersonInfo()
         
         /// 设置中间条目
-        let numView = UIView(frame: CGRect(x:0,y:screenHeight/3.25,width:screenWidth,height:screenHeight/6))
-        numView.backgroundColor = UIColor.white
+        let numView = UIView(frame: CGRect(x:0,y:screenHeight/3.25 - 3,width:screenWidth,height:screenHeight/6 + 5))
+        numView.backgroundColor = UIColor(patternImage: UIImage(named: "QRView")!)
         numView.isUserInteractionEnabled = true
         let gestureQR = UITapGestureRecognizer(target: self, action: #selector(QRViewTap))
         numView.addGestureRecognizer(gestureQR)

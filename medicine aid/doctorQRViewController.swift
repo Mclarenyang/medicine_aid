@@ -44,7 +44,7 @@ class doctorQRViewController: UIViewController {
         // 导出按钮
         let doneBtn = UIButton(frame:CGRect(x:80,y:screenHeight*5/7+90,width:screenWidth-165,height:55))
         doneBtn.setBackgroundImage(UIImage(named:"putOutQR"), for: UIControlState.normal)
-        //doneBtn.addTarget(self, action: #selector() , for: UIControlEvents.touchUpInside)
+        doneBtn.addTarget(self, action: #selector(doneBtnTap) , for: UIControlEvents.touchUpInside)
         self.view.addSubview(doneBtn)
         
         updateDoctorQR()
@@ -79,6 +79,19 @@ class doctorQRViewController: UIViewController {
             }
         }
     
+    }
+    
+    //保存二维码
+    func doneBtnTap() {
+        
+        UIImageWriteToSavedPhotosAlbum(QRImage.image!, nil, nil, nil)
+        
+        let alert = UIAlertController(title: "提示", message: "二维码成功保存到相册", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "好", style: .cancel, handler:nil)
+
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     /*

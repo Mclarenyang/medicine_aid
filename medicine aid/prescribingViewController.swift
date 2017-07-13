@@ -43,6 +43,11 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     var doctorId = ""
     var patientId = ""
     
+    //info
+    var nickname = ""
+    var phonenumber = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,10 +144,10 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         infoView.addSubview(patientTime)
         
         //测试设置
-        patientname.text = "黄日狗"
+        patientname.text = nickname
         patientSex.text = "男"
         patientAge.text = "34岁"
-        patientTime.text = "挂号时间：2:30"
+        patientTime.text = "患者电话：\(phonenumber)"
         
         
     }
@@ -151,6 +156,11 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     
     // 按钮事件(添加药物条目)
     func addBtnTap(_ button:UIButton){
+        
+        //判断是否为空
+        if self.MedicineName.text == "" || self.MedicineWeight.text == ""{
+        
+        }else{
         
         let medicalList = medicalListView(frame:CGRect(x:5, y:listHight, width: Int(screenWidth - 5) , height:50))
         medicalList.tag = viewTag
@@ -177,6 +187,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         //删除光标
         MedicineName.resignFirstResponder()
         MedicineWeight.resignFirstResponder()
+        }
         
     }
     
@@ -353,7 +364,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     }
     
     //断开患者
-    func cancelPatient() {
+      func cancelPatient() {
         
         ///在这里断开医生和患者链接
         let url = AESEncoding.myURL + "igds/app/link/cancle"

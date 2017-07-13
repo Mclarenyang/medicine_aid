@@ -218,12 +218,24 @@ class homeViewController: UIViewController,UIScrollViewDelegate {
     
     func treatBtnTap(_ button:UIButton){
         
-        /// push界面
-        let qrScanView = QRCodeViewController()
-        // 隐藏tabbar
-        qrScanView.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(qrScanView, animated: true)
+        //状态
+        let defaults = UserDefaults.standard
+        let status = String(describing: defaults.value(forKey: "status")!)
         
+        if status == "no" {
+            
+            /// push界面
+            let qrScanView = QRCodeViewController()
+            // 隐藏tabbar
+            qrScanView.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(qrScanView, animated: true)
+            
+        }else{
+            
+            let queueView = queueViewController()
+            queueView.doctorID = String(describing: defaults.value(forKey: "doctorID")!)
+            self.navigationController?.pushViewController(queueView, animated: true)
+        }
     }
     
     /*

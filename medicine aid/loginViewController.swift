@@ -181,11 +181,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                         realm.add(textUser, update: true)
                     }
          
-
-                    
+                    //保存用户Id和挂号状态
                     let defaults = UserDefaults.standard
                     defaults.set(textUser.UserID, forKey: "UserID")
-                    
+                    defaults.set("no", forKey: "status")
                     
                     // push 主界面
                     let homeView = mainTabbarController()

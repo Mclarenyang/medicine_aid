@@ -198,13 +198,23 @@ extension QRCodeViewController{
                             queueView.doctorID = first.messageString!
                             self.navigationController?.pushViewController(queueView, animated: true)
                             
+                            //储存挂号医生的ID，用于已挂查询
+                            let defaults = UserDefaults.standard
+                            defaults.set(first.messageString!, forKey: "doctorID")
+                            //更新挂号状态
+                            defaults.set("yes", forKey: "status")
+                            
+                            
                         }else if code == 403{
                             
                             let alert = UIAlertController(title: "提示", message: "您已经挂号，请勿重复提交", preferredStyle: .alert)
                             let doneAction = UIAlertAction(title: "好", style: .default, handler:{
                                 action in
                                 
-                                _ = self.navigationController?.popViewController(animated: true)
+                                let queueView = queueViewController()
+                                queueView.doctorID = first.messageString!
+                                self.navigationController?.pushViewController(queueView, animated: true)
+                                
                                 
                             })
                             alert.addAction(doneAction)
@@ -212,7 +222,7 @@ extension QRCodeViewController{
                             
                         }else{
                             
-                            let alert = UIAlertController(title: "链接错误，", message: "请联系技术人员", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "链接错误", message: "你可能扫了一个假的二维码", preferredStyle: .alert)
                             let doneAction = UIAlertAction(title: "好", style: .default, handler:{
                                 action in
                                 
