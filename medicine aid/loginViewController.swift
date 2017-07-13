@@ -207,6 +207,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //关闭所有页面手势返回功能
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
     // 显示密码
     func showPassWords(_ button:UIButton){
         

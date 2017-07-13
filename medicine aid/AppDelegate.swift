@@ -21,23 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// 加载纯代码视图
         //  确定根视图
-        if(true)
-        {
             //进入动画启动并登录
             self.window = UIWindow(frame:UIScreen.main.bounds)
             let navigationview = UINavigationController(rootViewController: RootViewController())
             self.window?.rootViewController = navigationview
             self.window?.makeKeyAndVisible()
             //UserDefaults.standard.set(true, forKey: "firstLaunch")
-        }
-        else{
-            //直接进入主页
-            self.window = UIWindow(frame:UIScreen.main.bounds)
-            let tabBarController = mainTabbarController()
-            self.window?.rootViewController = tabBarController
-            self.window?.backgroundColor = UIColor.white
-            self.window?.makeKeyAndVisible()
-        }
+        
+        
+//            //直接进入主页  等待优化
+//            self.window = UIWindow(frame:UIScreen.main.bounds)
+//            let tabBarController = mainTabbarController()
+//            self.window?.rootViewController = tabBarController
+//            self.window?.backgroundColor = UIColor.white
+//            self.window?.makeKeyAndVisible()
+//        
         
         /*
         //录入测试数据
