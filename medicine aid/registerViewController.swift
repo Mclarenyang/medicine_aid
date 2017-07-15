@@ -182,15 +182,32 @@ class registerViewController: UINavigationController,UITextFieldDelegate{
                 
                 let json = JSON(value)
                 
-                print(json)
-                
                 let code = json["code"]
                 
+                print("用户注册code:\(code)")
+                
                 switch code{
+                    
                 case 200:
                     print("注册成功")
+                    
+                    let alert = UIAlertController(title: "提示", message: "注册成功", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                        _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 default:
                     print("注册失败")
+                    
+                    let alert = UIAlertController(title: "注册失败", message: "错误代码:\(code)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                        _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
             }
         }

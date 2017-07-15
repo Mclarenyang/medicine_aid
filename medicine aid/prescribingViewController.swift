@@ -18,7 +18,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     var clientSocket:GCDAsyncSocket!
     
     // 预设IP地址
-    let beforeIP = "113.251.171.142"
+    let beforeIP = "113.251.223.3"
 //    let beforeIP = "192.168.2.141"
     let beforePort = UInt16(5566)
     
@@ -47,6 +47,8 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     var nickname = ""
     var phonenumber = ""
     
+    //载入滚动
+    var loadingIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,10 +112,15 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         
         
         // 链接
-        TCPLink(IPAddr: beforeIP, serverPort: beforePort)
+        //TCPLink(IPAddr: beforeIP, serverPort: beforePort)
         
         // Do any additional setup after loading the view.
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // 链接
+        TCPLink(IPAddr: beforeIP, serverPort: beforePort)
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,8 +152,8 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         
         //测试设置
         patientname.text = nickname
-        patientSex.text = "男"
-        patientAge.text = "34岁"
+        patientSex.text = ""
+        patientAge.text = ""
         patientTime.text = "患者电话：\(phonenumber)"
         
         
@@ -299,24 +306,44 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     
+    
     // 确定按钮
     func DoneBtn(_ button:UIButton){
         
+        //判断是不是空操作
+        guard viewTag-1 != 0 else {
+            return
+        }
+        
         let serviceStr: NSMutableString = NSMutableString()
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            
         //获取数据
-        let data = dataFlow()
-        serviceStr.append(data)
-        NSLog(data)
+        for index in 1...self.viewTag - 1{
+            
+            let data = self.dataFlow(index: index)
+            serviceStr.append(data)
+            
         
+            for i in 1...2{
         
-        //serviceStr.append("OPEN")
-        //serviceStr.append("\n")
-        clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
-        clientSocket.readData(withTimeout: -1, tag: 0)
+                
+                self.clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
+                self.clientSocket.readData(withTimeout: -1, tag: 0)
+    
+                print("第\(i)次发送:\(data)")
+                
+                sleep(2)
+                
+                }
+            }
+        
+        }
+        
         
         //断开链接
-        cancelPatient()
+        //cancelPatient()
     }
     
     // 设置另一个弹窗
@@ -349,17 +376,35 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
     }
     
     // 读取最终数据
-    func dataFlow() -> String {
+    func dataFlow(index:Int) -> String {
         
-        var data = "ID1:"
+        var data = ""
         
-        for index in 1...viewTag - 1{
         
             let list = view.viewWithTag(index) as! medicalListView
             
-            data = data + list.medicineName.text! + ":" + list.medicineWeight.text! + ";"
+            var tag = ""
             
-        }
+            switch list.medicineName.text! {
+            case "Heshouwu":
+                tag = "a"
+            case "Dongchongxiacao":
+                tag = "b"
+            case "Renshen":
+                tag = "c"
+            case "Danggui":
+                tag = "d"
+            default:
+                let alert = UIAlertController(title: "警告", message: "输入错误", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                    _ in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            data = tag + list.medicineWeight.text! + "g"
+        
         return data
     }
     

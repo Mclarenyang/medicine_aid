@@ -321,6 +321,15 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     alert.addAction(doneAction)
                     self.present(alert, animated: true, completion: nil)
                     
+                }else if code == 410{
+                
+                    let alert = UIAlertController(title: "Error", message: "已经\(type)挂号", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "好", style: .cancel, handler: nil)
+                    
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                
+                
                 }else{
                     
                     let alert = UIAlertController(title: "Error", message: "\(type)失败", preferredStyle: .alert)

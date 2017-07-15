@@ -21,7 +21,7 @@ let iv:[UInt8] = []
 
 //加密
 let aes = try AES(key: byteKey, iv: iv, blockMode: .ECB, padding: PKCS7())
-let ps = "testUserNickname".data(using: String.Encoding.utf8)
+let ps = "1246774880".data(using: String.Encoding.utf8)
 let encrypted = try aes.encrypt(ps!.bytes)
 
 //16进制

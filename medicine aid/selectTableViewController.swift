@@ -17,7 +17,7 @@ class selectTableViewController: UITableViewController {
     let screenHeight = UIScreen.main.bounds.height
     
     // 测试预设参数
-    var titles :[(String,String)] = [("昵称",""),("姓名",""),("性别",""),("年龄",""),("电话号码","")]
+    var titles :[(String,String)] = [("昵称",""),("姓名",""),("性别",""),("年龄",""),("电话号码",""),("密码","点击修改")]
     var indexI = 0
 
     
@@ -82,7 +82,7 @@ class selectTableViewController: UITableViewController {
         
         let rowIndex = indexPath.row
         switch rowIndex {
-        case 0...4:
+        case 0...5:
             
             let infochange = changeInfoViewController()
             infochange.key = rowIndex

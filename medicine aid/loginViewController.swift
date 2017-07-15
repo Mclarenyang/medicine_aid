@@ -62,9 +62,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         passwordText.placeholder = "密码"
         passwordText.borderColor = UIColor(red:255/255,green:60/255,blue:40/255 ,alpha: 1)
         passwordText.autocorrectionType = UITextAutocorrectionType.no
-        passwordText.returnKeyType = UIReturnKeyType.next
+        passwordText.returnKeyType = UIReturnKeyType.done
         //passwordText.clearButtonMode = UITextFieldViewMode.whileEditing
-        passwordText.keyboardType = UIKeyboardType.default
+        passwordText.keyboardType = UIKeyboardType.namePhonePad
         passwordText.keyboardAppearance = UIKeyboardAppearance.light
         passwordText.delegate = self
         passwordText.isSecureTextEntry = true
@@ -222,7 +222,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
 
     /*
