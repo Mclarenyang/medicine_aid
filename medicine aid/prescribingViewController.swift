@@ -12,10 +12,14 @@ import TextFieldEffects
 import CocoaAsyncSocket
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSocketDelegate{
 
     var clientSocket:GCDAsyncSocket!
+    
+    //存药方的str
+    var medicalStr = ""
     
     // 预设IP地址
     let beforeIP = "113.251.223.3"
@@ -111,8 +115,6 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         addBgView.addSubview(DoneBtn)
         
         
-        // 链接
-        //TCPLink(IPAddr: beforeIP, serverPort: beforePort)
         
         // Do any additional setup after loading the view.
         
@@ -239,7 +241,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         clientSocket.delegate = self
         clientSocket.delegateQueue = DispatchQueue.global()
         do {
-            try clientSocket.connect(toHost: IPAddr, onPort: serverPort)
+            try clientSocket.connect(toHost: IPAddr, onPort: serverPort, withTimeout: TimeInterval(0.3))
         } catch {
             NSLog("连接失败")
         }
@@ -315,10 +317,24 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
             return
         }
         
+        //判读是不是输入错误
+        let InPutbool = scanIn()
+        guard InPutbool == true else{
+            
+            let alert = UIAlertController(title: "警告", message: "输入错误", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
+                _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        
+        }
+        
         let serviceStr: NSMutableString = NSMutableString()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
         //获取数据
         for index in 1...self.viewTag - 1{
             
@@ -326,25 +342,21 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
             serviceStr.append(data)
             
         
-            for i in 1...2{
-        
-                
-                self.clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
-                self.clientSocket.readData(withTimeout: -1, tag: 0)
+            self.clientSocket.write(serviceStr.data(using: String.Encoding.utf8.rawValue)!, withTimeout: -1, tag: 0)
+            self.clientSocket.readData(withTimeout: -1, tag: 0)
+               
     
-                print("第\(i)次发送:\(data)")
-                
-                sleep(2)
-                
-                }
+            print("发送:\(data)")
+            sleep(1)
+        
             }
         
         }
-        
-        
         //断开链接
         //cancelPatient()
     }
+    
+    
     
     // 设置另一个弹窗
     func changeIp(){
@@ -395,17 +407,40 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
             case "Danggui":
                 tag = "d"
             default:
-                let alert = UIAlertController(title: "警告", message: "输入错误", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "好", style: .cancel, handler: {
-                    _ in
-                    self.dismiss(animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
+                print("输入错误")
             }
             
             data = tag + list.medicineWeight.text! + "g"
         
         return data
+    }
+    
+    //扫描是否输入错误
+    func scanIn() -> Bool{
+        
+        var bool : Bool = true
+        
+        for index in 1...viewTag-1 {
+            
+            let list = view.viewWithTag(index) as! medicalListView
+            
+            switch list.medicineName.text! {
+            case "Heshouwu":
+                print("输入a")
+            case "Dongchongxiacao":
+                print("输入b")
+            case "Renshen":
+                print("输入c")
+            case "Danggui":
+                print("输入d")
+            default:
+                bool = false
+                
+            }
+        
+        }
+        
+        return bool
     }
     
     //断开患者
@@ -436,6 +471,9 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
                     let doneAction = UIAlertAction(title: "好", style: .default, handler: {
                         action in
                         
+                        //药方本地话
+                        self.saveMedicalList()
+                        
                         _ = self.navigationController?.popViewController(animated: true)
                         
                     })
@@ -453,6 +491,51 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
                 }
             }
         }
+    }
+    
+    //药方本地化
+    func saveMedicalList(){
+    
+        //清空容器
+        medicalStr = ""
+        
+        for index in 1...viewTag-1 {
+            
+            let list = view.viewWithTag(index) as! medicalListView
+            medicalStr = medicalStr + list.medicineName.text! + "@" + list.medicineWeight.text! + "g" + "#"
+        }
+        
+        //读取储存信息
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID =  String(describing: defaults.value(forKey: "UserID")!)
+        
+        //读Type
+        let realm = try! Realm()
+        let doctorNickname = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserNickname
+        
+        //时间
+        let now = Date()
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("当前日期时间：\(dformatter.string(from: now))")
+        let time = dformatter.string(from: now)
+        
+        //存储
+        let dprlist = DPRList()
+        
+        dprlist.DoctorID = UserID
+        dprlist.PatientID = patientId
+        dprlist.DocrorNickname = doctorNickname
+        dprlist.PatientNickname = nickname
+        dprlist.Time = time
+        dprlist.MedicalList = medicalStr
+        
+        try! realm.write {
+            realm.add(dprlist)
+        }
+
+    
     }
     
     /*

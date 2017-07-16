@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class QRCodeViewController: UIViewController {
     
@@ -194,6 +195,10 @@ extension QRCodeViewController{
                         print("患者挂号code:\(code)")
                         
                         if code == 201{
+                            
+                            //挂号信息本地化
+                            saveRegister(doctorID: first.messageString!)
+                            
                             let queueView = queueViewController()
                             queueView.doctorID = first.messageString!
                             self.navigationController?.pushViewController(queueView, animated: true)
@@ -244,6 +249,44 @@ extension QRCodeViewController{
         }
     }
 }
+
+
+//挂号本地化
+func saveRegister(doctorID: String){
+
+    //读取储存信息
+    //ID
+    let defaults = UserDefaults.standard
+    let UserID =  String(describing: defaults.value(forKey: "UserID")!)
+    
+    //读Type
+    let realm = try! Realm()
+    let patientNickname = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserNickname
+    
+    //时间
+    let now = Date()
+    let dformatter = DateFormatter()
+    dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+    print("当前日期时间：\(dformatter.string(from: now))")
+    let time = dformatter.string(from: now)
+    
+    //存储
+    let dprlist = DPRList()
+    
+    dprlist.DoctorID = doctorID
+    dprlist.PatientID = UserID
+    //dprlist.DocrorNickname = doctorNickname
+    dprlist.PatientNickname = patientNickname
+    dprlist.Time = time
+    //dprlist.MedicalList = medicalStr
+    
+    try! realm.write {
+        realm.add(dprlist)
+    }
+
+
+}
+
 
 extension QRCodeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

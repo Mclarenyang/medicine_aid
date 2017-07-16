@@ -93,6 +93,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         forgetPWBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(forgetPWBtn)
         
+        let now = Date()
+        
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("当前日期时间：\(dformatter.string(from: now))")
+        
+        
     }
 
     // 跳转事件

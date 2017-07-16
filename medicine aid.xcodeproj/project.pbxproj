@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		461A64A71EC7050C00F554B6 /* prescribingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461A64A61EC7050C00F554B6 /* prescribingViewController.swift */; };
+		46203ED31F1AFFEC00C7F369 /* InquiryRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46203ED21F1AFFEC00C7F369 /* InquiryRecordTableViewController.swift */; };
+		46203ED51F1B032100C7F369 /* VisitingRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46203ED41F1B032100C7F369 /* VisitingRecordTableViewController.swift */; };
+		46203ED71F1B0E3000C7F369 /* myPMedicineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46203ED61F1B0E3000C7F369 /* myPMedicineTableViewController.swift */; };
+		46203ED91F1B23D700C7F369 /* DPRList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46203ED81F1B23D700C7F369 /* DPRList.swift */; };
 		468958951EC313B400E5DCED /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958941EC313B400E5DCED /* homeViewController.swift */; };
 		468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A21EC351F800E5DCED /* searchingMedicineViewController.swift */; };
 		468958A51EC3564900E5DCED /* queueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468958A41EC3564900E5DCED /* queueViewController.swift */; };
@@ -43,6 +47,10 @@
 		021C5240B7405E2589825ECE /* Pods-medicine aid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-medicine aid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-medicine aid/Pods-medicine aid.debug.xcconfig"; sourceTree = "<group>"; };
 		0362CA9D6F5E8C142C621176 /* Pods-medicine aid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-medicine aid.release.xcconfig"; path = "Pods/Target Support Files/Pods-medicine aid/Pods-medicine aid.release.xcconfig"; sourceTree = "<group>"; };
 		461A64A61EC7050C00F554B6 /* prescribingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = prescribingViewController.swift; sourceTree = "<group>"; };
+		46203ED21F1AFFEC00C7F369 /* InquiryRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryRecordTableViewController.swift; sourceTree = "<group>"; };
+		46203ED41F1B032100C7F369 /* VisitingRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitingRecordTableViewController.swift; sourceTree = "<group>"; };
+		46203ED61F1B0E3000C7F369 /* myPMedicineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myPMedicineTableViewController.swift; sourceTree = "<group>"; };
+		46203ED81F1B23D700C7F369 /* DPRList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPRList.swift; sourceTree = "<group>"; };
 		464A29441F0F1D5400AB7C16 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/medicine_aid-epqkqshtpbgsnrbydcwpspdjclxm/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		464A29461F0F1D5900AB7C16 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "../../Library/Developer/Xcode/DerivedData/medicine_aid-epqkqshtpbgsnrbydcwpspdjclxm/Build/Products/Debug-iphonesimulator/CocoaAsyncSocket/CocoaAsyncSocket.framework"; sourceTree = "<group>"; };
 		464A29481F0F1D5D00AB7C16 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../Library/Developer/Xcode/DerivedData/medicine_aid-epqkqshtpbgsnrbydcwpspdjclxm/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
@@ -146,6 +154,9 @@
 				468B0D301EC55109001CDFCD /* aboutUsViewController.swift */,
 				46C7C4141ECA9D7300EB600A /* selectTableViewController.swift */,
 				46E7A9FD1F1213C50095B83A /* changeInfoViewController.swift */,
+				46203ED21F1AFFEC00C7F369 /* InquiryRecordTableViewController.swift */,
+				46203ED41F1B032100C7F369 /* VisitingRecordTableViewController.swift */,
+				46203ED61F1B0E3000C7F369 /* myPMedicineTableViewController.swift */,
 			);
 			name = viewLink2;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 			children = (
 				46EC2ACB1F136493006AE02A /* UserTest.swift */,
 				46CA47D81F15FD7C00A30FC5 /* DoctorQR.swift */,
+				46203ED81F1B23D700C7F369 /* DPRList.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -382,12 +394,14 @@
 				46C7C4151ECA9D7300EB600A /* selectTableViewController.swift in Sources */,
 				46AC265F1EC3F127007AEA36 /* tabBarViewController.swift in Sources */,
 				461A64A71EC7050C00F554B6 /* prescribingViewController.swift in Sources */,
+				46203ED91F1B23D700C7F369 /* DPRList.swift in Sources */,
 				46CA47D91F15FD7C00A30FC5 /* DoctorQR.swift in Sources */,
 				468B0D311EC55109001CDFCD /* aboutUsViewController.swift in Sources */,
 				468958A51EC3564900E5DCED /* queueViewController.swift in Sources */,
 				46EC2ACC1F136493006AE02A /* UserTest.swift in Sources */,
 				468958A31EC351F800E5DCED /* searchingMedicineViewController.swift in Sources */,
 				46A132A61F0F784A004E3CE9 /* medicalListView.swift in Sources */,
+				46203ED71F1B0E3000C7F369 /* myPMedicineTableViewController.swift in Sources */,
 				468C12131F147720002D5D7E /* AESEncoding.swift in Sources */,
 				46AC265D1EC3EEA7007AEA36 /* tabBar.swift in Sources */,
 				46BE6EBC1F0DD24E00D41852 /* QRCodeReaderView.swift in Sources */,
@@ -396,10 +410,12 @@
 				46BE6EBA1F0DD24E00D41852 /* QRCodeReader.swift in Sources */,
 				46E7A9FE1F1213C50095B83A /* changeInfoViewController.swift in Sources */,
 				46AC265B1EC3EB25007AEA36 /* tabBarButton.swift in Sources */,
+				46203ED31F1AFFEC00C7F369 /* InquiryRecordTableViewController.swift in Sources */,
 				468958951EC313B400E5DCED /* homeViewController.swift in Sources */,
 				46E1055D1EBF354400AB4D26 /* medicine_aid.xcdatamodeld in Sources */,
 				468958A71EC357A600E5DCED /* personalViewController.swift in Sources */,
 				46E105551EBF354400AB4D26 /* AppDelegate.swift in Sources */,
+				46203ED51F1B032100C7F369 /* VisitingRecordTableViewController.swift in Sources */,
 				46BE6EBB1F0DD24E00D41852 /* QRCodeViewController.swift in Sources */,
 				46E105701EBF5A3D00AB4D26 /* registerViewController.swift in Sources */,
 				46E1056A1EBF357F00AB4D26 /* RootViewController.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 class medicalListView: UIView {
 
     //信息
-    var medicineName = UILabel(frame: CGRect(x:10,y:0,width:100,height:50))
+    var medicineName = UILabel(frame: CGRect(x:10,y:0,width:200,height:50))
     var medicineWeight = UILabel(frame: CGRect(x:170,y:0,width:100,height:50))
     let deleteBtn = UIButton(frame: CGRect(x:345,y:20,width:15,height:15))
     

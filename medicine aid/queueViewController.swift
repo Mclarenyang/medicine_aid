@@ -236,8 +236,9 @@ class queueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func refreshTableView(){
     
         getInfo()
-
+        
         rc.endRefreshing()
+        
     }
     
     // 数据更新

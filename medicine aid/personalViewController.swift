@@ -89,12 +89,12 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         //   问诊记录
         let prescribeRecordBtn = UIButton(frame: CGRect(x:screenWidth*1/12,y:screenHeight/22,width:screenWidth*4.75/12,height:screenHeight/6))
         prescribeRecordBtn.setBackgroundImage(UIImage(named:"prescribe_record_bt"), for: UIControlState.normal)
-        //prescribeRecordBtn.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControlEvents#>)
+        prescribeRecordBtn.addTarget(self, action: #selector(openInquiryRecord), for: .touchUpInside)
         infoView.addSubview(prescribeRecordBtn)
         //   就诊记录
         let treatRecordBtn = UIButton(frame: CGRect(x:screenWidth*6.25/12,y:screenHeight/22,width:screenWidth*4.75/12,height:screenHeight/6))
         treatRecordBtn.setBackgroundImage(UIImage(named:"treat_record_bt"), for: UIControlState.normal)
-        //treatRecordBtn.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControlEvents#>)
+        treatRecordBtn.addTarget(self, action: #selector(openVisitingRecord), for: .touchUpInside)
         infoView.addSubview(treatRecordBtn)
         //   服药提醒
         let cautionBtn = UIButton(frame: CGRect(x:screenWidth*1/12,y:screenHeight/4.2,width:screenWidth*4.75/12,height:screenHeight/6))
@@ -324,6 +324,48 @@ class personalViewController: UIViewController , UIPopoverPresentationController
        
         
     }
+    
+    //问诊记录
+    func openInquiryRecord() {
+        
+        //ID
+        let defaults = UserDefaults.standard
+        let UserID = defaults.value(forKey: "UserID")!
+        
+        //读Type
+        let realm = try! Realm()
+        
+        let type = realm.objects(UserText.self).filter("UserID = '\(UserID)'")[0].UserType
+        
+        //判断权限
+        if type == "doctor" {
+            
+            let IRView = InquiryRecordTableViewController()
+            IRView.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(IRView, animated: true)
+            
+        }else{
+            
+            //警告
+            let alert = UIAlertController(title: "警告", message: "没有权限", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    
+    //就诊记录
+    func openVisitingRecord() {
+        
+        let VRView = VisitingRecordTableViewController()
+        VRView.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(VRView, animated: true)
+     
+    }
+    
     
     /*
     // MARK: - Navigation
