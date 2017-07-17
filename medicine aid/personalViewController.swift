@@ -147,17 +147,17 @@ class personalViewController: UIViewController , UIPopoverPresentationController
         
     }
 
-    // popview弹出
+    // 清信息
     func rightBtnTap(_ button:UIButton){
         
-        let popover = selectTableViewController()
-        popover.modalPresentationStyle = .popover
-        popover.preferredContentSize = CGSize(width:50,height:50)
-        popover.popoverPresentationController?.delegate = self
-        popover.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-        popover.popoverPresentationController?.sourceRect = rightbtn.bounds
-        popover.popoverPresentationController?.permittedArrowDirections = .up
-        self.present(popover, animated: true, completion: nil)
+        //用户信息
+        let defaults = UserDefaults.standard
+        
+        //用户名密码
+        defaults.set("", forKey: "myphone")
+        defaults.set("", forKey: "mypassword")
+
+        
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

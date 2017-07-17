@@ -334,7 +334,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
         
         let serviceStr: NSMutableString = NSMutableString()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
         //获取数据
         for index in 1...self.viewTag - 1{
             
@@ -347,13 +347,13 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
                
     
             print("发送:\(data)")
-            sleep(1)
+            sleep(2)
         
             }
         
         }
         //断开链接
-        //cancelPatient()
+        cancelPatient()
     }
     
     

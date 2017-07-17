@@ -93,14 +93,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         forgetPWBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(forgetPWBtn)
         
-        let now = Date()
-        
-        let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-        print("当前日期时间：\(dformatter.string(from: now))")
-        
         
     }
+    
 
     // 跳转事件
     func registerTap(_ button:UIButton){
@@ -193,6 +188,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     defaults.set(textUser.UserID, forKey: "UserID")
                     defaults.set("no", forKey: "status")
                     
+                    //用户名密码
+                    defaults.set(self.phoneText.text!, forKey: "myphone")
+                    defaults.set(self.passwordText.text!, forKey: "mypassword")
+                    
                     // push 主界面
                     let homeView = mainTabbarController()
                     self.navigationController?.pushViewController(homeView, animated: true)
@@ -216,6 +215,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         //关闭所有页面手势返回功能
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        AutoInfo()
+        
     }
     
     // 显示密码
@@ -230,6 +232,16 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //自动填充登陆
+    func AutoInfo() {
+        
+        let defaults = UserDefaults.standard
+        
+        phoneText.text =  String(describing: defaults.value(forKey: "myphone")!)
+        passwordText.text =  String(describing: defaults.value(forKey: "mypassword")!)
+        
+        
+    }
 
     /*
     // MARK: - Navigation
