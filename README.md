@@ -46,7 +46,7 @@ iOS client program and design diagram of National College Students Connected Sma
 * sketch UI设计平台
 * principle动效设计平台
 * CocoaPods项目依赖管理平台
-* swift 2.0开发语言
+* swift 2开发语言
 
 #### 2.1.2 运行环境
 <a name='运行环境'/>
@@ -54,8 +54,7 @@ iOS client program and design diagram of National College Students Connected Sma
 
 * 系统环境：iOS7.0+系统
 * 硬件环境：
-  * iPhone5以上机型
-  * iPadmini2以上机型
+  * iPhone6P/7P
   * 装有Simulator的Mac电脑
 
 ### 2.2 技术实现
