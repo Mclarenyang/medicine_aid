@@ -80,31 +80,31 @@ iOS client program and design diagram of National College Students Connected Sma
 <a name='建模技术'/>
 &emsp;以下是客户端模块在运作情况下的建模流程图：
 
-![IMAGE](quiver-image-url/F4D2238FB546A5F2BAD4C356AB5300E7.jpg =554x160)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/F4D2238FB546A5F2BAD4C356AB5300E7.jpg =554x160)
 
-![IMAGE](quiver-image-url/26A796D64988E74BC3C652A67FDEB116.jpg =554x194)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/26A796D64988E74BC3C652A67FDEB116.jpg =554x194)
 
 #### 2.2.3 Sketch
 <a name='Sketch'/>
 &emsp;项目iOS客户端采用Sketch作为设计平台对客户端平台的原型进行设计，最后形成的项目静态原型设计图如下：
   
 * 图标及滚动页面
-![IMAGE](quiver-image-url/761490956AAFB7E0442F5F48353D64D1.jpg =844x115)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/761490956AAFB7E0442F5F48353D64D1.jpg =844x115)
 
 * 启动欢迎与登陆页面
-![IMAGE](quiver-image-url/906B1EA511A008E689D1610261F8C63C.jpg =719x564)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/906B1EA511A008E689D1610261F8C63C.jpg =719x564)
 
 * 注册与排号就医页面
-![IMAGE](quiver-image-url/F10996AB7A46086D913353E511C23294.jpg =698x566)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/F10996AB7A46086D913353E511C23294.jpg =698x566)
 
 * 主选项与药材百科查询页面
-![IMAGE](quiver-image-url/E226F55966B6C1B2F4D1A9734BFFC808.jpg =735x616)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/E226F55966B6C1B2F4D1A9734BFFC808.jpg =735x616)
 
 * 个人信息中心与开药页面
-![IMAGE](quiver-image-url/FD457B20A109C64720FCBFD6B1558A54.jpg =745x593)
+![IMAGE](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/FD457B20A109C64720FCBFD6B1558A54.jpg =745x593)
 
 #### 2.2.4 Principle
 <a name='Principle' />
 &emsp;项目iOS客户端采用Principle作为动画效果设计平台对客户端平台的原型进行设计，最后形成的项目动态交互原型展示如下：
 
-![principle.gif](quiver-image-url/53214F8DDBAF4C2E9AACEC196A61C1AE.gif =800x600)
+![principle.gif](https://github.com/Mclarenyang/medicine_aid/raw/master/resources/53214F8DDBAF4C2E9AACEC196A61C1AE.gif =800x600)
