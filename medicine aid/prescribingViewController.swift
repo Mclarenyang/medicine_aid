@@ -471,7 +471,7 @@ class prescribingViewController: UIViewController,UISearchBarDelegate,GCDAsyncSo
                     let doneAction = UIAlertAction(title: "好", style: .default, handler: {
                         action in
                         
-                        //药方本地话
+                        //药方本地化
                         self.saveMedicalList()
                         
                         _ = self.navigationController?.popViewController(animated: true)
