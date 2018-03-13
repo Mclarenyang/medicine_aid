@@ -20,7 +20,6 @@ iOS client program and design diagram of National College Students Connected Sma
   * 2.2.2 [建模技术](#建模技术)
   * 2.2.3 [Sketch](#Sketch)
   * 2.2.4 [Principle](#Principle)
-  * 2.2.5 [核心代码](#核心代码)
 
 ---
 
